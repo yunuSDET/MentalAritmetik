@@ -1,0 +1,6 @@
+
+
+SORULAR POPUPDA SORULSUN (SCENE OLABİLİR BAK)
+Yazılar ve tablolar büyütülmeli
+Navbar büyütülmeli
+Hatada doğru cevap gösterilmeli (parmaklarla)
