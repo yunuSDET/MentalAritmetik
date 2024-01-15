@@ -418,20 +418,53 @@ async function start(event) {
 
 
 
-window.onbeforeunload = function() {
-    // AJAX ile PHP'ye veriyi gönder
+
+// JavaScript tarafında puan hesaplama ve sunucuya istek gönderme
+function kazanilanPuaniHesaplaVeGonder(earnedPoints) {
+    // Puan hesaplamalarını ve site etkileşimini yap
+
+    // Örnek olarak bir puan kazanıldığını varsayalım
+    console.log("Kazanılan Puan: " + earnedPoints);
+
+    // Veritabanına puanı göndermek için bir HTTP isteği gönder
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "saveData.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    
-    // Aktif kullanıcının userId'sini gönder
-   // var userId = <?php echo isset($_SESSION['userId']) ? $_SESSION['userId'] : 'null'; ?>;
-    
-    // Örneğin, puan ve süre verilerini buradan alabilirsin
-    var score = 50; // Örnek veri, gerçek veriyi senin kullanman gerekiyor
-    var time = 120; // Örnek veri, gerçek veriyi senin kullanman gerekiyor
-    
-    var data = "userId=" + userId + "&score=" + score + "&time=" + time;
-    
-    xhr.send(data);
+
+    // Kullanıcının oturum (session) bilgilerini gönder
+    var userId = getLoggedInUserId(); // Bu fonksiyonun implementasyonunu size bırakıyorum
+    var params = "userId=" + userId + "&earnedPoints=" + earnedPoints;
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log("Veritabanına başarıyla kaydedildi.");
+        }
+    };
+
+    // İsteği gönder
+    xhr.send(params);
+}
+
+// Bu fonksiyon, kullanıcının oturum bilgilerini döndürür
+function getLoggedInUserId() {
+    // Örneğin, tarayıcıda bir cookie kullanarak oturum bilgilerini alabilirsiniz
+    var cookieName = "userId"; // Kullanıcının ID'sini saklayan bir cookie adı
+
+    // Tarayıcıdaki tüm cookieleri al
+    var allCookies = document.cookie;
+
+    // Cookieleri parçalayarak bir dizi haline getir
+    var cookiesArray = allCookies.split(";");
+
+    // Kullanıcının ID'sini içeren cookie'yi bul
+    var userIdCookie = cookiesArray.find(cookie => cookie.includes(cookieName));
+
+    if (userIdCookie) {
+        // Cookie bulunduysa, kullanıcının ID'sini çıkar
+        var userId = userIdCookie.split("=")[1];
+        return userId;
+    } else {
+        // Cookie bulunamazsa veya kullanıcı oturum açmamışsa null döndür
+        return null;
+    }
 }
