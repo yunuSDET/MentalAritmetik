@@ -61,7 +61,7 @@ include 'navbar.php';
           <form>
             <div class="form-row align-items-center">
             <h5>Seviye Seçin</h5>
-                <select class="custom-select mr-sm-2" id="level">
+                <select class="custom-select mr-sm-2" id="selected_level">
                   <option selected>Seviye Seçin</option>
                   <option value=1>1</option>
                   <option value=2>2</option>

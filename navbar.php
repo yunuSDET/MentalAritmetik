@@ -31,9 +31,8 @@ if (session_status() == PHP_SESSION_NONE) {
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="finger-read.php">Parmak Okuma</a>
-                            <a class="dropdown-item" href="level1.php">Seviye 1</a>
-                            <a class="dropdown-item" href="level2.php">Seviye 2</a>
-                            <a class="dropdown-item" href="level3.php">Seviye 3</a>
+                            <a class="dropdown-item" href="levels.php">Seviyeler</a>
+                            
                         </div>
                     </li>
                   </ul>
