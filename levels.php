@@ -57,15 +57,15 @@ include 'navbar.php';
       <div class="row bg-light max-auto">
 
         <div class="col-sm-12">
-          <h1 style="text-align: center;">Parmak Abaküsü Seviye 1</h1>
+          <h1 style="text-align: center;">Parmak Abaküsü</h1>
           <form>
             <div class="form-row align-items-center">
             
-              <div class="col-sm-6 offset-3 mb-3 mt-2">
-              <h5 class="text-center">Seviye Seçin</h5>
-                <select class="custom-select mr-sm-2" id="selected_level">
-                  <option selected>Seviye Seçin</option>
-                  <option value=1>1</option>
+              <div class="col-sm-4 text-center position-relative mb-3 mt-2">
+                <h5 class="text-center">Seviye Seçin</h5>
+                <select class="col-sm-12 custom-select mr-sm-2" id="selected_level">
+                  <option  value=0>Seviye Seçin</option>
+                  <option selected value=1>1</option>
                   <option value=2>2</option>
                   <option value=3>3</option>
                   <option value=4>4</option>
@@ -74,12 +74,49 @@ include 'navbar.php';
                   
                 </select>
               </div>
+               
 
-              <div class="col-auto my-1 offset-1">
+              <div class="col-sm-4 my-1 position-relative">
+                <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                <h5>İşlem Seçin</h5>
+                <select class="custom-select mr-sm-2 col-sm-12" id="islem">
+                  <option value=0>İşlem Seçin</option>
+
+                  <option selected value=1>-+</option>
+                </select>
+
+                
+              </div>
+
+
+
+              <div class="col-sm-4 my-1 position-relative">
+                <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                <h5>Maksimum ve Minimum Sayılar</h5>
+                <select class="col-sm-12 custom-select mr-sm-2" id="aralik">
+                  <option value=0>Aralık Seçin</option>
+                  <option value=1>1-9</option>
+                  <option value=2>1-20</option>
+                  <option value=3>1-50</option>
+                  <option selected value=4>1-99</option>
+                  <option value=5>10-99</option>
+                  <option value=6>1-999</option>
+                  
+                  
+                </select>
+
+                
+              </div>
+
+
+
+
+
+              <div class="col-6 my-1">
                 <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
                 <h5>Bekleme Süresi Seçin</h5>
-                <select class="custom-select mr-sm-2" id="bekleme">
-                  <option selected>Sure Seçin</option>
+                <select class="custom-select mr-sm-2 col-sm-12" id="bekleme">
+                  <option value=0>Sure Seçin</option>
                   <option value=1>0.1</option>
                   <option value=2>0.2</option>
                   <option value=3>0.3</option>
@@ -99,7 +136,7 @@ include 'navbar.php';
                   <option value=17>1.7</option>
                   <option value=18>1.8</option>
                   <option value=19>1.9</option>
-                  <option value=20>2</option>
+                  <option selected value=20>2</option>
                   <option value=21>3</option>
                   <option value=22>4</option>
                   <option value=23>5</option>
@@ -114,41 +151,12 @@ include 'navbar.php';
                 
               </div>
 
-              <div class="col-auto my-1">
-                <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                <h5>Maksimum ve Minimum Sayılar</h5>
-                <select class="custom-select mr-sm-2" id="aralik">
-                  <option selected>Aralık Seçin</option>
-                  <option value=1>1-9</option>
-                  <option value=2>1-20</option>
-                  <option value=3>1-50</option>
-                  <option value=4>1-99</option>
-                  <option value=5>10-99</option>
-                  <option value=6>1-999</option>
-                  
-                  
-                </select>
-
-                
-              </div>
-
-              <div class="col-auto my-1">
-                <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                <h5>İşlem Seçin</h5>
-                <select class="custom-select mr-sm-2" id="islem">
-                  <option selected>İşlem Seçin</option>
-
-                  <option value=1>-+</option>
-                </select>
-
-                
-              </div>
-
-              <div class="col-auto my-1">
+             
+              <div class="col-6 my-1">
                 <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
                 <h5>İşlem Sayısı</h5>
-                <select class="custom-select mr-sm-2" id="islem-sayisi">
-                  <option selected>İşlem Sayısı</option>
+                <select class="col-sm-12 custom-select mr-sm-2" id="islem-sayisi">
+                  <option value=0>İşlem Sayısı</option>
                   <option value=1>1</option>
                   <option value=2>2</option>
                   <option value=3>3</option>
@@ -158,7 +166,7 @@ include 'navbar.php';
                   <option value=7>7</option>
                   <option value=8>8</option>
                   <option value=9>9</option>
-                  <option value=10>10</option>
+                  <option selected value=10>10</option>
                   <option value=12>12</option>
                   <option value=14>14</option>
                   <option value=16>16</option>
@@ -181,15 +189,22 @@ include 'navbar.php';
                 
               </div>
 
-                <div class="col-auto my- mt-4">
-                 
-                  <button type="submit" class="btn btn-primary" id="start">Başla</button>
-                </div>
+               
              
 
 
 
             </div>
+
+
+            <div class="col-sm-12 my- mt-4 position-relative text-center">
+                 
+                 <button type="submit" class="btn btn-primary" id="start">Başla</button>
+
+
+            </div>
+
+
           </form>
         </div>
           
@@ -203,14 +218,11 @@ include 'navbar.php';
 
         <div style="font-size: 100px;" class="col-sm text-center" id="scene">
      
-          
-
-          
         </div>
            
 
 
-        </div>
+      </div>
 
       </div>
 
