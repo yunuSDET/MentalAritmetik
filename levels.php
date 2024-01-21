@@ -60,6 +60,17 @@ include 'navbar.php';
           <h1 style="text-align: center;">Parmak Abaküsü Seviye 1</h1>
           <form>
             <div class="form-row align-items-center">
+            <h5>Seviye Seçin</h5>
+                <select class="custom-select mr-sm-2" id="level">
+                  <option selected>Seviye Seçin</option>
+                  <option value=1>1</option>
+                  <option value=2>2</option>
+                  <option value=3>3</option>
+                  <option value=4>4</option>
+                  <option value=5>5</option>
+                 
+                  
+                </select>
               <div class="col-auto my-1 offset-1">
                 <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
                 <h5>Bekleme Süresi Seçin</h5>
