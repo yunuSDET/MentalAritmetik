@@ -8,7 +8,10 @@ let islemSayisi = document.getElementById("islem-sayisi").selectedOptions[0].tex
 
 let minValue = aralik.split("-")[0];
 let maxValue = aralik.split("-")[1];
-let level = "L1"
+ 
+let level ="L" + parseInt(document.getElementById("selected_level").selectedOptions[0].textContent);
+ 
+
 let isWorking=false;
 
 //ILK SAYI 50 OLURSA HATA OLUŞUYOR
@@ -37,15 +40,48 @@ document.addEventListener("keyup", function (event) {
 
 
 function checkAdditionConditions(active1, active2) {
-    return (active1 < 5 && (active1 + active2 < 5 || active2 === 5 || (active2 > (active1 + 5) && (active1 + active2) < 10))) ||
-           (active1 === 5 && active2 < 5) ||
-           (active1 > 5 && (active1 + active2 <= 9));
+    let  level1Condition=(active1 < 5 && (active1 + active2 < 5 || active2 === 5 || (active2 > (active1 + 5) && (active1 + active2) < 10))) ||
+    (active1 === 5 && active2 < 5) ||
+    (active1 > 5 && (active1 + active2 <= 9))
+   
+    let level2Condition= active1 < 5 && (active1 + active2 >= 5 && active2 <5)
+   
+    if(level==="L1"){
+        return level1Condition;
+    }else if(level==="L2"){
+
+        return level1Condition || level2Condition ;
+
+    }
+
+    return false;
+
 }
 
 function checkSubtractionConditions(active1, active2) {
-    return (active1 < 5 && active2 <= active1) ||
-           (active1 === 5 && active2 === 5) ||
-           (active1 > 5 && (active2 === 5 || (active2 > 5 && active2 <= active1)));
+
+  let  level1Condition=(active1 < 5 && active2 <= active1) ||
+    (active1 === 5 && active2 === 5) ||
+    (active1 > 5 && (active2 === 5 || (active2 > 5 && active2 <= active1)));
+
+    let level2Condition=(active1 == 5 && (active2<5))
+    ||
+    (active1 > 5 
+        && (
+            (active2<5) 
+            && 
+            (active2>(active1-5))
+            )
+    )
+
+   if(level==="L1"){
+    return level1Condition;
+   }else if(level==="L2"){
+    return  level1Condition || level2Condition;
+
+}
+
+   return false;
 }
 
 function levelChecker(n1, n2, activeOperator) {
@@ -221,12 +257,18 @@ startButton.addEventListener("click", start);
 
 let scene = document.getElementById("scene");
 
- 
 
 async function start(event) {
 
     event.preventDefault();
+    level ="L" + parseInt(document.getElementById("selected_level").selectedOptions[0].textContent);
+ 
 
+    if(!(level==="L1" || level==="L2")){
+        console.log("Seviye bir dışındaki seviler güncellendikçe burada güncelleme yapılsın.");
+        
+        return;
+    }
 
      
     if (isWorking==true) return;
