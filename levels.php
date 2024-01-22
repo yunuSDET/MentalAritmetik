@@ -23,6 +23,37 @@ include 'navbar.php';
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
+
+    <style>
+    body {
+      font-family: 'Single Day', cursive;
+      background: url('/img/light.jpg') no-repeat;
+      background-size: cover;
+    }
+
+
+
+ 
+
+
+
+    .tableText {
+
+      font-size: 22px;
+
+
+
+    }
+
+   
+
+
+
+
+  </style>
+
+
+
     <title>Parmak Abaküsü</title>
   </head>
   <body>
@@ -54,9 +85,9 @@ include 'navbar.php';
 
     <div class="container">
 
-      <div class="row bg-light max-auto">
+      <div class="row max-auto">
 
-        <div class="col-sm-12">
+        <div class="col-sm-9 ">
           <h1 style="text-align: center;">Parmak Abaküsü</h1>
           <form>
             <div class="form-row align-items-center">
@@ -208,6 +239,11 @@ include 'navbar.php';
           </form>
         </div>
           
+        <div class="col-sm-3">
+          <?php
+          include 'right-side-bar.php';
+          ?>
+        </div>
 
 
       </div>
