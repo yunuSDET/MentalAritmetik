@@ -49,12 +49,17 @@ function checkAdditionConditions(active1, active2) {
    
     let level2Condition= active1 < 5 && (active1 + active2 >= 5 && active2 <5)
 
+    let level3Condition = active1+active2>=10;
    
     if(level==="L1"){
         return level1Condition;
     }else if(level==="L2"){
 
         return level1Condition || level2Condition ;
+
+    }else if(level==="L3"){
+
+        return level1Condition || level2Condition || level3Condition;
 
     }
 
@@ -78,12 +83,17 @@ function checkSubtractionConditions(active1, active2) {
             )
     )
 
+    let level3Condition = active1<active2;
+
    if(level==="L1"){
     return level1Condition;
    }else if(level==="L2"){
     return  level1Condition || level2Condition;
 
-}
+    }else if(level==="L3"){
+        return  level1Condition || level2Condition || level3Condition;
+    
+        }
 
    return false;
 }
@@ -272,7 +282,7 @@ async function start(event) {
     level ="L" + parseInt(document.getElementById("selected_level").selectedOptions[0].textContent);
  
 
-    if(!(level==="L1" || level==="L2")){
+    if(!(level==="L1" || level==="L2" || level==="L3")){
         console.log("Seviye bir dışındaki seviler güncellendikçe burada güncelleme yapılsın.");
         
         return;
