@@ -170,6 +170,10 @@ include 'navbar.php';
                   <option value=18>1.8</option>
                   <option value=19>1.9</option>
                   <option selected value=20>2</option>
+                  <option value=21>2.2</option>
+                  <option value=21>2.4</option>
+                  <option value=21>2.6</option>
+                  <option value=21>2.8</option>
                   <option value=21>3</option>
                   <option value=22>4</option>
                   <option value=23>5</option>

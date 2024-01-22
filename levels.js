@@ -45,6 +45,7 @@ function checkAdditionConditions(active1, active2) {
     (active1 > 5 && (active1 + active2 <= 9))
    
     let level2Condition= active1 < 5 && (active1 + active2 >= 5 && active2 <5)
+
    
     if(level==="L1"){
         return level1Condition;
