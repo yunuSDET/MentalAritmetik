@@ -51,6 +51,7 @@ include 'navbar.php';
 
 
 
+
   </style>
 
   <title>Parmak Abaküsü</title>

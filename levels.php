@@ -45,7 +45,9 @@ include 'navbar.php';
 
     }
 
-   
+    h5{
+      color:red;
+    }
 
 
 
@@ -83,12 +85,12 @@ include 'navbar.php';
    
 
 
-    <div class="container">
+    <div class="container mt-3">
 
       <div class="row max-auto">
 
         <div class="col-sm-9 ">
-          <h1 style="text-align: center;">Parmak Abaküsü</h1>
+        <h1 class="display-3" style="text-align: center;color:Darkorange "><b>PARMAK ABAKÜSÜ </b></h1>
           <form>
             <div class="form-row align-items-center">
             
