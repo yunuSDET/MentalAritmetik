@@ -9,6 +9,9 @@ let islemSayisi = document.getElementById("islem-sayisi").selectedOptions[0].tex
 let minValue = aralik.split("-")[0];
 let maxValue = aralik.split("-")[1];
  
+let questions="";
+
+
 let level ="L" + parseInt(document.getElementById("selected_level").selectedOptions[0].textContent);
  
 
@@ -148,6 +151,7 @@ async function askQuestion(miliSeconds) {
         await wait(100);
         scene.innerHTML=result;
         playBeepSound("beep");
+        questions=number+" "
         await wait(miliSeconds);
         continue;
         }
@@ -183,6 +187,9 @@ async function askQuestion(miliSeconds) {
         scene.innerHTML="";
         await wait(100);
         scene.innerHTML=show;
+        questions+=show+" ";
+       
+        
         playBeepSound("beep");
         await wait(miliSeconds);
 
@@ -336,6 +343,9 @@ async function start(event) {
             scene.innerHTML='<h1 class="display-2 bg-danger">Hata<br>Cevap '+result+'.</h1>' 
             playBeepSound("error1")
         }
+
+        console.log(questions);
+        
         
         isWorking=false;
     })
