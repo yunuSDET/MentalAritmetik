@@ -227,7 +227,7 @@ async function start(event) {
 
             let newPointWithPersentage = (pagePointElement.innerHTML / 1000).toFixed(2).split(".")[1];
 
-            update_right_side_bar(newPointWithPersentage);
+            update_right_side_bar(newPointWithPersentage,newTime);
 
             pageTimeElement.innerHTML = Math.round(parseInt(pageTimeElement.innerHTML) + newTime);
 
@@ -243,12 +243,13 @@ async function start(event) {
         }
     });
 
-    function update_right_side_bar(newScore) {
+    function update_right_side_bar(newScore,newTime) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 document.getElementById("daily-progress").innerHTML = newScore;
                 kazanilanPuaniHesaplaVeGonder(newPoint);
+                kazanilanSureyiHesaplaVeGonder(newTime+2);
                 let progressBar = document.getElementById("progress-bar");
                 progressBar.style.width = newScore + "%";
                 progressBar.setAttribute("aria-valuenow", newScore);
@@ -280,6 +281,31 @@ function kazanilanPuaniHesaplaVeGonder(earnedPoints) {
 
     xhr.send(params);
 }
+
+
+function kazanilanSureyiHesaplaVeGonder(earnedTime) {
+    console.log("Kazanılan Zaman: " + earnedTime);
+
+    var currentPageName = window.location.pathname.split("/").pop();
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "saveData.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    var userId = getLoggedInUserId();
+    var params = "userId=" + userId + "&earnedTime=" + earnedTime + "&pageName=" + currentPageName; // earnedPoints yerine earnedTime düzeltildi
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log("Veritabanına başarıyla kaydedildi.");
+        }
+    };
+
+    xhr.send(params);
+}
+
+
+
 
 function getLoggedInUserId() {
     var cookieName = "userId";
