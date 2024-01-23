@@ -340,15 +340,16 @@ async function start(event) {
      }
    });
 
-
+let newPoint;
+let newTime;
 
    checkButton.addEventListener("click", () => {
        let userAnswer = document.getElementById("user-answer").value;
        if(!userAnswer) return;
        
 
-       let newPoint = 5+5/parseFloat(time)
-       let newTime = parseFloat(time)
+       newPoint = 5+5/parseFloat(time)
+       newTime = parseFloat(time)
 
 
        if(generatedNumber==parseInt(userAnswer)){
@@ -393,7 +394,7 @@ async function start(event) {
         if (xhr.readyState == 4 && xhr.status == 200) {
 
             document.getElementById("daily-progress").innerHTML = newScore;
-            
+            kazanilanPuaniHesaplaVeGonder(newPoint);//sil
            let progressBar= document.getElementById("progress-bar");
            progressBar.style.width = newScore + "%";
            progressBar.setAttribute("aria-valuenow", newScore);
@@ -468,3 +469,4 @@ function getLoggedInUserId() {
         return null;
     }
 }
+
