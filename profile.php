@@ -95,20 +95,22 @@ if (isset($_SESSION['userId'])) {
 $pdo = new PDO('sqlite:database.db');
 
 // Kullanıcının puan bilgilerini çek
-$getUserScores = $pdo->prepare("SELECT score,zaman_damgasi FROM scores WHERE userId = :userId");
+$getUserScores = $pdo->prepare("SELECT score,zaman_damgasi,pageName FROM scores WHERE userId = :userId");
 $getUserScores->bindParam(':userId', $userId);
 $getUserScores->execute();
 
 $scores = $getUserScores->fetchAll(PDO::FETCH_ASSOC);
 
 $outputString = "";  // Her bir satırı biriktirmek için boş bir string
+$pageName = "";
 
 foreach ($scores as $scoreData) {
     $score = $scoreData['score'];  // Puan
     $zaman_damgasi = $scoreData['zaman_damgasi'];  // Zaman damgası
+    $pageName = $scoreData['pageName'];  // Sayfa Adı
 
     // Her bir satırı stringe ekle
-    $outputString .= "Puan: $score, ==> Tarih : $zaman_damgasi <br>";
+    $outputString .= "Puan: $score, ==> Tarih : $zaman_damgasi ==> ($pageName)<br>";
 }
 
 // Kullanıcının toplam süre bilgisini çek
@@ -121,8 +123,9 @@ $outputStringTime="";
 foreach ($totalTimeRows as $totalTimeRow) {
     $totalTime = $totalTimeRow['total_time'];
     $zaman_damgasi = $scoreData['zaman_damgasi'];  // Zaman damgası
+    $pageName = $scoreData['pageName'];  // Sayfa Adı
     // Her bir satırı stringe ekle
-    $outputStringTime .= "Süre: $totalTime saniye ==> Tarih : $zaman_damgasi <br>";
+    $outputStringTime .= "Süre: $totalTime saniye ==> Tarih : $zaman_damgasi ==> ($pageName) <br>";
 }
 ?>
 
