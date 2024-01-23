@@ -351,6 +351,7 @@ async function start(event) {
             playBeepSound("claps")
         }else{
             scene.innerHTML='<h1 class="display-2 bg-danger">Hata<br>Cevap '+result+'.</h1>' 
+            scene.innerHTML+='<p style="font-size:50px">Soru: '+questions+'</p>';
             playBeepSound("error1")
         }
 
