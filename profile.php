@@ -95,16 +95,35 @@ if (isset($_SESSION['userId'])) {
 $pdo = new PDO('sqlite:database.db');
 
 // Kullanıcının puan bilgilerini çek
-$getUserScores = $pdo->prepare("SELECT score FROM scores WHERE userId = :userId");
+$getUserScores = $pdo->prepare("SELECT score,zaman_damgasi FROM scores WHERE userId = :userId");
 $getUserScores->bindParam(':userId', $userId);
 $getUserScores->execute();
-$scores = $getUserScores->fetchAll(PDO::FETCH_COLUMN);
+
+$scores = $getUserScores->fetchAll(PDO::FETCH_ASSOC);
+
+$outputString = "";  // Her bir satırı biriktirmek için boş bir string
+
+foreach ($scores as $scoreData) {
+    $score = $scoreData['score'];  // Puan
+    $zaman_damgasi = $scoreData['zaman_damgasi'];  // Zaman damgası
+
+    // Her bir satırı stringe ekle
+    $outputString .= "Puan: $score, ==> Tarih : $zaman_damgasi <br>";
+}
 
 // Kullanıcının toplam süre bilgisini çek
-$getUserTotalTime = $pdo->prepare("SELECT SUM(time_seconds) AS total_time FROM times WHERE userId = :userId");
+$getUserTotalTime = $pdo->prepare("SELECT time_seconds AS total_time FROM times WHERE userId = :userId");
 $getUserTotalTime->bindParam(':userId', $userId);
 $getUserTotalTime->execute();
-$totalTime = $getUserTotalTime->fetch(PDO::FETCH_ASSOC)['total_time'];
+
+$totalTimeRows = $getUserTotalTime->fetchAll(PDO::FETCH_ASSOC);
+$outputStringTime="";
+foreach ($totalTimeRows as $totalTimeRow) {
+    $totalTime = $totalTimeRow['total_time'];
+    $zaman_damgasi = $scoreData['zaman_damgasi'];  // Zaman damgası
+    // Her bir satırı stringe ekle
+    $outputStringTime .= "Süre: $totalTime saniye ==> Tarih : $zaman_damgasi <br>";
+}
 ?>
 
 
@@ -118,11 +137,11 @@ $totalTime = $getUserTotalTime->fetch(PDO::FETCH_ASSOC)['total_time'];
 
         <tr>
             <th>Puan</th>
-            <td><?= implode(', ', $scores) ?></td>
+            <td><?=  $outputString?></td>
         </tr>
         <tr>
-            <th>Toplam Süre (saniye)</th>
-            <td><?= $totalTime ?></td>
+            <th>Süre (saniye)</th>
+            <td><?= $outputStringTime?></td>
         </tr>
     </table>
  
