@@ -193,7 +193,7 @@ include 'navbar.php';
                 <h5>İşlem Sayısı</h5>
                 <select class="col-sm-12 custom-select mr-sm-2" id="islem-sayisi">
                   <option value=0>İşlem Sayısı</option>
-                  <option value=1>1</option>
+
                   <option value=2>2</option>
                   <option value=3>3</option>
                   <option value=4>4</option>
