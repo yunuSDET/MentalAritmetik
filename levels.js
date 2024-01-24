@@ -1,6 +1,6 @@
  
 let spentTime;
-let point;
+let point=0;
 let result = 0;
 let testResult = 0;
 let show = "";
@@ -360,7 +360,8 @@ async function start(event) {
             point += currentPoint;
 
             let newPointWithPersentage = (point / 1000).toFixed(2).split(".")[1];
-
+     
+                
             update_right_side_bar(newPointWithPersentage);
             
             kazanilanPuaniHesaplaVeGonder(currentPoint);
