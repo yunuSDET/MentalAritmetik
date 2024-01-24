@@ -124,7 +124,7 @@ include 'navbar.php';
 
               <div class="col-sm-4 my-1 position-relative">
                 <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                <h5>Maksimum ve Minimum Sayılar</h5>
+                <h5>Aralık Seçin</h5>
                 <select class="col-sm-12 custom-select mr-sm-2" id="aralik">
                   <option value=0>Aralık Seçin</option>
                   <option value=1>1-9</option>

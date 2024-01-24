@@ -108,9 +108,10 @@ foreach ($scores as $scoreData) {
     $score = $scoreData['score'];  // Puan
     $zaman_damgasi = $scoreData['zaman_damgasi'];  // Zaman damgası
     $pageName = $scoreData['pageName'];  // Sayfa Adı
+    $pageName = ($pageName == "finger-read.php") ? "Parmak Okuma" : (($pageName == "levels.php") ? "İşlemler" : "Belirsiz");
 
     // Her bir satırı stringe ekle
-    $outputString .= "Puan: $score, ==> Tarih : $zaman_damgasi ==> ($pageName)<br>";
+    $outputString .= "$score, ==> Tarih : $zaman_damgasi ==> ($pageName)<br>";
 }
 
 // Kullanıcının toplam süre bilgisini çek
@@ -124,8 +125,10 @@ foreach ($totalTimeRows as $totalTimeRow) {
     $totalTime = $totalTimeRow['total_time'];
     $zaman_damgasi = $totalTimeRow['zaman_damgasi'];  // Zaman damgası
     $pageName = $totalTimeRow['pageName'];  // Sayfa Adı
+    $pageName = ($pageName == "finger-read.php") ? "Parmak Okuma" : (($pageName == "levels.php") ? "İşlemler" : "Belirsiz");
+
     // Her bir satırı stringe ekle
-    $outputStringTime .= "Süre: $totalTime saniye ==> Tarih : $zaman_damgasi ==> ($pageName) <br>";
+    $outputStringTime .= "$totalTime saniye ==> Tarih : $zaman_damgasi ==> ($pageName) <br>";
 }
 ?>
 
@@ -134,18 +137,23 @@ foreach ($totalTimeRows as $totalTimeRow) {
  
     <h2></h2>
     <table>
-        <tr>
+
+     <tr>
            <th class="text-center" colspan="2"><?= $username ?></th>
         </tr>
 
         <tr>
             <th>Puan</th>
-            <td><?=  $outputString?></td>
+            <th>Süre (saniye)</th>
         </tr>
         <tr>
-            <th>Süre (saniye)</th>
+            <td><?=  $outputString?></td>
             <td><?= $outputStringTime?></td>
         </tr>
+
+
+
+ 
     </table>
  
 
