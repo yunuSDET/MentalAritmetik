@@ -114,7 +114,7 @@ foreach ($scores as $scoreData) {
 }
 
 // Kullanıcının toplam süre bilgisini çek
-$getUserTotalTime = $pdo->prepare("SELECT time_seconds AS total_time FROM times WHERE userId = :userId");
+$getUserTotalTime = $pdo->prepare("SELECT time_seconds AS total_time,pageName,zaman_damgasi FROM times WHERE userId = :userId");
 $getUserTotalTime->bindParam(':userId', $userId);
 $getUserTotalTime->execute();
 
@@ -122,8 +122,8 @@ $totalTimeRows = $getUserTotalTime->fetchAll(PDO::FETCH_ASSOC);
 $outputStringTime="";
 foreach ($totalTimeRows as $totalTimeRow) {
     $totalTime = $totalTimeRow['total_time'];
-    $zaman_damgasi = $scoreData['zaman_damgasi'];  // Zaman damgası
-    $pageName = $scoreData['pageName'];  // Sayfa Adı
+    $zaman_damgasi = $totalTimeRow['zaman_damgasi'];  // Zaman damgası
+    $pageName = $totalTimeRow['pageName'];  // Sayfa Adı
     // Her bir satırı stringe ekle
     $outputStringTime .= "Süre: $totalTime saniye ==> Tarih : $zaman_damgasi ==> ($pageName) <br>";
 }
