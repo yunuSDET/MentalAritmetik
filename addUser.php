@@ -27,7 +27,7 @@ if(
 
 <div class="container bg-primary-subtle">
     <div class="row">
-        <br>
+         
         <div class="col-sm-12 mt-4">
             <h2 style="text-align:center">Kullanıcı Ekle</h2>
 
