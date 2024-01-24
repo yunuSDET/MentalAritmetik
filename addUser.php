@@ -2,17 +2,16 @@
 include 'sessionManager.php';
 checkUserSession();
 
-
-// Admin kontrolü
- 
-if (
+//Admin kontrolü
+if(
     isset($_SESSION['user']) &&
     $_SESSION['user'] !== 'admin'
-) {
+){
     echo "Yetkisiz alandasınız. Ana sayfaya yönlendiriliyorsunuz...";
-    header("Refresh: 3; URL=index.php"); // 3 saniye sonra ana sayfaya yönlendir
+    header("Refresh: 3; URL=index.php"); //3 saniye sonra ana sayfaya yönlendir.
     exit();
 }
+ 
 ?>
 
 <!DOCTYPE html>
