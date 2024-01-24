@@ -1,5 +1,6 @@
  
-
+let spentTime;
+let point;
 let result = 0;
 let testResult = 0;
 let show = "";
@@ -344,6 +345,8 @@ async function start(event) {
 
 
 
+
+
     let checkButton = document.getElementById("control");
     checkButton.addEventListener("click", () => {
         let userAnswer = document.getElementById("user-answer").value;
@@ -351,6 +354,19 @@ async function start(event) {
         if(result==parseInt(userAnswer)){
             scene.innerHTML='<h1 class="display-2 bg-success">Tebrikler,<br>Cevap '+result+'.</h1>'
             playBeepSound("claps")
+            spentTime=time*islemSayisi
+            let currentPoint= calcultePoint(time,islemSayisi);
+
+            point += currentPoint;
+
+            let newPointWithPersentage = (point / 1000).toFixed(2).split(".")[1];
+
+            update_right_side_bar(newPointWithPersentage);
+            
+            kazanilanPuaniHesaplaVeGonder(currentPoint);
+            kazanilanSureyiHesaplaVeGonder(spentTime);
+
+
         }else{
             scene.innerHTML='<h1 class="display-2 bg-danger">Hata<br>Cevap '+result+'.</h1>' 
             scene.innerHTML+='<p style="font-size:50px">Soru: '+questions+'</p>';

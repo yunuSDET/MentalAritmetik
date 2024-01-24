@@ -60,6 +60,32 @@ function getLoggedInUserId() {
     }
 }
 
+
+function update_right_side_bar(newScore) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById("daily-progress").innerHTML = newScore;
+            
+            
+            let progressBar = document.getElementById("progress-bar");
+            progressBar.style.width = newScore + "%";
+            progressBar.setAttribute("aria-valuenow", newScore);
+        }
+    };
+
+    xhr.open("GET", "right-side-bar.php", true);
+    xhr.send();
+}
+
+
+function calcultePoint(time,islemSayisi){
+    return 5 + (islemSayisi/time);
+}
+
+
 window.kazanilanPuaniHesaplaVeGonder = kazanilanPuaniHesaplaVeGonder;
 window.kazanilanSureyiHesaplaVeGonder = kazanilanSureyiHesaplaVeGonder;
 window.getLoggedInUserId = getLoggedInUserId;
+window.update_right_side_bar = update_right_side_bar;
+window.calcultePoint = calcultePoint;

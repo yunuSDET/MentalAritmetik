@@ -247,21 +247,6 @@ async function start(event) {
         }
     });
 
-    function update_right_side_bar(newScore) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                document.getElementById("daily-progress").innerHTML = newScore;
-                
-                
-                let progressBar = document.getElementById("progress-bar");
-                progressBar.style.width = newScore + "%";
-                progressBar.setAttribute("aria-valuenow", newScore);
-            }
-        };
-
-        xhr.open("GET", "right-side-bar.php", true);
-        xhr.send();
-    }
+    
 }
 
