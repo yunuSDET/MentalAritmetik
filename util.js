@@ -62,6 +62,8 @@ function getLoggedInUserId() {
 
 
 function update_right_side_bar(newScore) {
+    newScore = (newScore / 1000).toFixed(2).split(".")[1];
+
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {

@@ -174,12 +174,15 @@ include 'navbar.php';
 
 
       <div class="col-sm-3 mt-3">
-       
-<?php
+ 
+ 
+
+   
+      <?php
 include 'right-side-bar.php';
+
 ?>
       </div>
-
 
 
     </div>

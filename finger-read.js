@@ -227,9 +227,9 @@ async function start(event) {
 
             pagePointElement.innerHTML = Math.round(parseInt(pagePointElement.innerHTML) + newPoint);
 
-            let newPointWithPersentage = (pagePointElement.innerHTML / 1000).toFixed(2).split(".")[1];
+            
 
-            update_right_side_bar(newPointWithPersentage);
+            update_right_side_bar(pagePointElement.innerHTML);
 
             pageTimeElement.innerHTML = Math.round(parseInt(pageTimeElement.innerHTML) + newTime);
 
