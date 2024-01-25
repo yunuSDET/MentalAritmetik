@@ -237,6 +237,20 @@ include 'navbar.php';
             </div>
 
 
+            <div class="mx-auto mt-3" style="width: fit-content;">
+
+
+
+
+
+
+            </div>
+
+
+
+            
+
+
             <div class="col-sm-12 my- mt-4 position-relative text-center">
                  
                  <button type="submit" class="btn btn-primary" id="start">Başla</button>
@@ -245,9 +259,31 @@ include 'navbar.php';
             </div>
 
 
+            
+
+
+
           </form>
+          
+
+          <table class="table-bordered">
+                <tr class="bg-secondary">
+                  <td class="tableText">Puanınız</td>
+                  <td class="tableText">Süreniz</td>
+                </tr>
+                <tr class="bg-light" style="text-align: center;">
+                  <td class="tableText" id="current-point">0</td>
+                  <td class="tableText" id="current-time-seconds">0</td>
+                </tr>
+              </table>
+
+
         </div>
           
+
+
+
+
         <div class="col-sm-3">
           <?php
           include 'right-side-bar.php';
@@ -274,7 +310,7 @@ include 'navbar.php';
 
     </div>
 
-    <script type="module" src="util.js"></script>
+ <script type="module" src="util.js"></script>
  <script src="levels.js"></script>
  
 

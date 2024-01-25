@@ -16,7 +16,7 @@ include 'navbar.php';
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-
+  
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -55,6 +55,7 @@ include 'navbar.php';
   </style>
 
   <title>Parmak Abaküsü</title>
+
 </head>
 
 <body>
@@ -134,7 +135,7 @@ include 'navbar.php';
             <div class="mx-auto mt-3" style="width: fit-content;">
 
 
-              <table class="table-bordered">
+            <table class="table-bordered">
                 <tr class="bg-secondary">
                   <td class="tableText">Puanınız</td>
                   <td class="tableText">Süreniz</td>
@@ -177,7 +178,7 @@ include 'navbar.php';
  
  
 
-   
+     
       <?php
 include 'right-side-bar.php';
 
@@ -204,7 +205,7 @@ include 'right-side-bar.php';
 
   </div>
 
-  <script type="module" src="util.js"></script>
+  <script type="module" src="util.js"></script> 
   <script src="finger-read.js"></script>
  
   <!-- Optional JavaScript; choose one of the two! -->

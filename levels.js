@@ -1,6 +1,6 @@
  
 let spentTime;
-let point=0;
+
 let result = 0;
 let testResult = 0;
 let show = "";
@@ -8,7 +8,8 @@ let time = document.getElementById("bekleme").selectedOptions[0].textContent;
 let operator = document.getElementById("islem").selectedOptions[0].textContent;
 let aralik = document.getElementById("aralik").selectedOptions[0].textContent;
 let islemSayisi = document.getElementById("islem-sayisi").selectedOptions[0].textContent;
-
+let pagePointElement = document.getElementById("current-point");
+let point=parseInt(pagePointElement.innerHTML);
 let minValue = aralik.split("-")[0];
 let maxValue = aralik.split("-")[1];
  
@@ -358,11 +359,15 @@ async function start(event) {
             let currentPoint= calcultePoint(time,islemSayisi);
 
             point += currentPoint;
+            
+            
+            pagePointElement.innerHTML = point;
 
-            let newPointWithPersentage = (point / 1000).toFixed(2).split(".")[1];
-     
+            
+
+            update_right_side_bar(pagePointElement.innerHTML);
                 
-            update_right_side_bar(newPointWithPersentage);
+            
             
             kazanilanPuaniHesaplaVeGonder(currentPoint);
             kazanilanSureyiHesaplaVeGonder(spentTime);
