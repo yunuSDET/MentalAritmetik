@@ -231,11 +231,11 @@ async function start(event) {
 
             update_right_side_bar(pagePointElement.innerHTML);
 
-            pageTimeElement.innerHTML = Math.round(parseInt(pageTimeElement.innerHTML) + newTime);
+            pageTimeElement.innerHTML = Math.round(parseInt(pageTimeElement.innerHTML) + newTime+1);
 
             showPopup(newPoint, true);
             kazanilanPuaniHesaplaVeGonder(newPoint);
-            kazanilanSureyiHesaplaVeGonder(newTime+2);
+            kazanilanSureyiHesaplaVeGonder(newTime+1);
             actualQuestion = "ask";
         } else {
             scene.innerHTML = "";

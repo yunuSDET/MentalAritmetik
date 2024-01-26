@@ -173,18 +173,7 @@ try {
         $userActualPoint = 0; // veya başka bir değer atayabilirsiniz
     }
      
-    echo '<script type="module" src="util.js"></script>';
-    echo '<script>';
-    
-    echo 'document.addEventListener("DOMContentLoaded", async function() {';
-    echo '  var userActualPoint = ' . $userActualPoint . ';'; // Değişkenin tanımı fonksiyon içinde
-    echo '  document.getElementById("current-point").innerHTML = ' . $userActualPoint . ';';
-    
-    echo '  await update_right_side_bar(' . $userActualPoint . ');';
- 
-    echo '});';
-    
-    echo '</script>';
+
 
 
 
@@ -231,6 +220,21 @@ try {
       if ($userActualTime  === false || $userTotalTime === null) {
         $userTotalTime  = 0; // veya başka bir değer atayabilirsiniz
       }
+
+
+      echo '<script type="module" src="util.js"></script>';
+      echo '<script>';
+      
+      echo 'document.addEventListener("DOMContentLoaded", async function() {';
+      echo '  var userActualPoint = ' . $userActualPoint . ';'; 
+      echo '  var userActualTime = ' . $userActualTime . ';'; 
+      echo '  document.getElementById("current-point").innerHTML = ' . $userActualPoint . ';';
+      echo '  document.getElementById("current-time-seconds").innerHTML = ' . $userActualTime. ';';
+      echo '  await update_right_side_bar(' . $userActualPoint . ');';
+   
+      echo '});';
+      
+      echo '</script>';
 
 
 
