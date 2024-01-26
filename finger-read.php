@@ -23,7 +23,7 @@ include 'navbar.php';
   <style>
     body {
       font-family: 'Single Day', cursive;
-      background: url('/img/light.jpg') no-repeat;
+      background: url('img/light.jpg') no-repeat;
       background-size: cover;
     }
 
@@ -32,7 +32,7 @@ include 'navbar.php';
     #start {
       padding: 60px 55px;
       font-size: 24px;
-      background: url('/img/sun.png') no-repeat;
+      background: url('img/sun.png') no-repeat;
       background-size: cover;
     }
 

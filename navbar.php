@@ -2,11 +2,11 @@
 if (session_status() == PHP_SESSION_NONE) {
     // Eğer bir oturum başlatılmamışsa başlat
     session_start();
-    
+
    
 }
 
-
+ 
 ?>
 
 

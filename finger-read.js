@@ -44,7 +44,7 @@ function showPopup(score, isTrue, msg) {
 
     if (isTrue) {
         var trueImg = document.createElement("img");
-        trueImg.src = "/img/trueImg.png";
+        trueImg.src = "img/trueImg.png";
         trueImg.alt = "True";
         trueImg.style.width = "40px";
         trueImg.style.height = "40px";

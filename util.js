@@ -1,4 +1,4 @@
-
+var webPath = "/";
 function kazanilanPuaniHesaplaVeGonder(earnedPoints) {
     console.log("Kazanılan Puan: " + earnedPoints);
 
@@ -91,3 +91,4 @@ window.kazanilanSureyiHesaplaVeGonder = kazanilanSureyiHesaplaVeGonder;
 window.getLoggedInUserId = getLoggedInUserId;
 window.update_right_side_bar = update_right_side_bar;
 window.calcultePoint = calcultePoint;
+ 
