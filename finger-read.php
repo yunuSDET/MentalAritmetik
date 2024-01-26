@@ -10,7 +10,7 @@ include 'navbar.php';
 <html lang="en">
 
 <head>
-
+<script type="module" src="util.js"></script> 
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -205,7 +205,7 @@ include 'right-side-bar.php';
 
   </div>
 
-  <script type="module" src="util.js"></script> 
+
   <script src="finger-read.js"></script>
  
   <!-- Optional JavaScript; choose one of the two! -->

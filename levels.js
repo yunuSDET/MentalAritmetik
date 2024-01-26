@@ -357,7 +357,7 @@ async function start(event) {
             playBeepSound("claps")
             spentTime=time*islemSayisi
             let currentPoint= calcultePoint(time,islemSayisi);
-
+            point=parseInt(pagePointElement.innerHTML);
             point += currentPoint;
             
             

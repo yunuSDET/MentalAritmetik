@@ -266,7 +266,8 @@ include 'navbar.php';
           </form>
           
 
-          <table class="table-bordered">
+<div class="col-sm-12 text-center">
+<table class="table-bordered mx-auto">
                 <tr class="bg-secondary">
                   <td class="tableText">Puanınız</td>
                   <td class="tableText">Süreniz</td>
@@ -276,6 +277,7 @@ include 'navbar.php';
                   <td class="tableText" id="current-time-seconds">0</td>
                 </tr>
               </table>
+</div>
 
 
         </div>

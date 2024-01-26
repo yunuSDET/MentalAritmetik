@@ -25,14 +25,11 @@ try {
         $userActualPoint = 0; // veya başka bir değer atayabilirsiniz
     }
      
- 
-    echo '<script>';
-    echo 'var userActualPoint = ' . json_encode($userActualPoint) . ';';
-    echo 'document.getElementById("current-point").innerHTML = '. json_encode($userActualPoint) .';';
-    echo 'update_right_side_bar('. json_encode($userActualPoint) .')';
-    echo '</script>';
+    
+
+    
 } catch (PDOException $e) {
-    echo 'Hata: ' . $e->getMessage();
+   echo 'Hata: ' . $e->getMessage();
 }
 ?>
 
@@ -150,21 +147,109 @@ try {
       
     </li>
 
+ <?php
+ 
+
+
+
+$userId = $_SESSION['userId'];
+$userActualPoint="";
+$userTotalPoint="";
+$userActualTime="";
+$userTotalTime="";
+try {
+    $pdo = new PDO('sqlite:database.db');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Kullanıcının adını çek
+    $query = $pdo->prepare("SELECT sum(score) FROM scores WHERE userId = :userId AND DATE(zaman_damgasi) = CURRENT_DATE");
+    $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $query->execute();
+
+    $userActualPoint = $query->fetchColumn();
+ 
+    // JSON_ENCODE kontrolü
+    if ($userActualPoint === false || $userActualPoint === null) {
+        $userActualPoint = 0; // veya başka bir değer atayabilirsiniz
+    }
+     
+    echo '<script type="module" src="util.js"></script>';
+    echo '<script>';
     
+    echo 'document.addEventListener("DOMContentLoaded", async function() {';
+    echo '  var userActualPoint = ' . $userActualPoint . ';'; // Değişkenin tanımı fonksiyon içinde
+    echo '  document.getElementById("current-point").innerHTML = ' . $userActualPoint . ';';
+    
+    echo '  await update_right_side_bar(' . $userActualPoint . ');';
+ 
+    echo '});';
+    
+    echo '</script>';
+
+
+
+    //total point
+    $query = $pdo->prepare("SELECT sum(score) FROM scores WHERE userId = :userId");
+    $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $query->execute();
+
+    $userTotalPoint = $query->fetchColumn();
+ 
+    // JSON_ENCODE kontrolü
+    if ($userTotalPoint === false || $userTotalPoint === null) {
+        $userTotalPoint = 0; // veya başka bir değer atayabilirsiniz
+    }
+
+
+
+
+    //Günlük zaman
+ 
+     $query = $pdo->prepare("SELECT sum(time_seconds) FROM times WHERE userId = :userId AND DATE(zaman_damgasi) = CURRENT_DATE");
+     $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+     $query->execute();
+ 
+     $userActualTime = $query->fetchColumn();
+  
+     // JSON_ENCODE kontrolü
+     if ($userActualTime  === false || $userActualTime === null) {
+      $userActualTime  = 0; // veya başka bir değer atayabilirsiniz
+     }
+    
+
+
+     //Toplam süre
+ 
+ 
+      $query = $pdo->prepare("SELECT sum(time_seconds) FROM times WHERE userId = :userId");
+      $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+      $query->execute();
+  
+      $userTotalTime = $query->fetchColumn();
+   
+      // JSON_ENCODE kontrolü
+      if ($userActualTime  === false || $userTotalTime === null) {
+        $userTotalTime  = 0; // veya başka bir değer atayabilirsiniz
+      }
+
+
+
+} catch (PDOException $e) {
+    echo 'Hata: ' . $e->getMessage();
+}
+?>   
 
 
     <li>
       <a href="#pageSubmenuPuan" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Puan Tablosu</a>
       <ul class="collapse list-unstyled" id="pageSubmenuPuan">
       <li>
-          <p>Bugün - 678</p>
+          <p>Bugün - <?php echo $userActualPoint." puan" ?></p>
         </li>
         <li>
-          <p>Hafta - 5623</p>
+          <p>Toplam- <?php echo $userTotalPoint." puan" ?></p>
         </li>
-        <li>
-          <p>Ay - 8988</p>
-        </li>
+ 
       </ul>
     </li>
     <li>
@@ -172,14 +257,12 @@ try {
       <a href="#pageSubmenuSure" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Süre Tablosu</a>
       <ul class="collapse list-unstyled" id="pageSubmenuSure">
         <li>
-          <p>Bugün - 678</p>
+          <p>Bugün - <?php echo $userActualTime." saniye" ?></p>
         </li>
         <li>
-          <p>Hafta - 5623</p>
+          <p>Hafta - <?php echo $userTotalTime." saniye" ?></p>
         </li>
-        <li>
-          <p>Ay - 8988</p>
-        </li>
+ 
       </ul>
     </li>
 
