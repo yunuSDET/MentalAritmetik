@@ -2,11 +2,11 @@
 if (session_status() == PHP_SESSION_NONE) {
     // Eğer bir oturum başlatılmamışsa başlat
     session_start();
-
+    
    
 }
-
  
+
 ?>
 
 
@@ -36,12 +36,6 @@ if (session_status() == PHP_SESSION_NONE) {
                             
                         </div>
                     </li>
-
-                    <li class="nav-item active">
-                    <a class="nav-link" href="leaderboard.php">Başarı Tablosu <span class="sr-only">(current)</span></a>
-                    </li>
-
-
                   </ul>
                   <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
