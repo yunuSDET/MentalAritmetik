@@ -75,12 +75,11 @@ include 'navbar.php';
         <div class="card-body">
           
           <h5 class="card-title">Alıştırmalara Başlayalım</h5>
-          <p class="card-text">Seviyesi seçiniz.</p>
+          <p class="card-text">Çalışma Seçiniz</p>
 
           <a href="finger-read.php" class="card-link">Parmak Okuma</a>
-          <a href="level1.php" class="card-link">Seviye 1</a>
-          <a href="level2.php" class="card-link">Seviye 2</a>
-          <a href="level3.php" class="card-link">Seviye 3</a>
+          <a href="levels.php" class="card-link">Seviyeler</a>
+         
         </div>
       </div>
   </div>
