@@ -44,7 +44,7 @@ function showPopup(score, isTrue, msg) {
 
     if (isTrue) {
         var trueImg = document.createElement("img");
-        trueImg.src = "img/trueImg.png";
+        trueImg.src = "/img/trueImg.png";
         trueImg.alt = "True";
         trueImg.style.width = "40px";
         trueImg.style.height = "40px";
@@ -55,7 +55,7 @@ function showPopup(score, isTrue, msg) {
     } else if (isTrue === false) {
         popup.style.background = "Gainsboro";
         var falseImg = document.createElement("img");
-        falseImg.src = "img/falseImg.png";
+        falseImg.src = "/img/falseImg.png";
         falseImg.alt = "False";
         falseImg.style.width = "40px";
         falseImg.style.height = "40px";
@@ -65,7 +65,7 @@ function showPopup(score, isTrue, msg) {
     } else {
         popup.style.background = "White";
         var questioImg = document.createElement("img");
-        questioImg.src = "img/questionImg.png";
+        questioImg.src = "/img/questionImg.png";
         questioImg.alt = "Question";
         questioImg.style.width = "40px";
         questioImg.style.height = "40px";
