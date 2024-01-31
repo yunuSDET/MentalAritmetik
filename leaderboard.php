@@ -68,7 +68,7 @@ include 'navbar.php';
      $query->execute();
      $theNumberOfUsers= $query->rowCount();
      
-     echo "<table border='1'>
+     echo "<table border='1' style='margin-top:30px'>
      
      <tr>
      <th colspan='3' class='text-center'>Günlük Tablo</th>
@@ -124,7 +124,7 @@ $query->bindParam(':endDate', $endDate, PDO::PARAM_STR);
 $query->execute();
 
 // Tabloyu HTML olarak yazdır
-echo "<table border='1'>
+echo "<table border='1' style='margin-top:50px'>
       <tr>
           <th colspan='3' class='text-center'>Son Hafta Tablosu</th>
       </tr>
