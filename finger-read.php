@@ -226,3 +226,4 @@ include 'right-side-bar.php';
 </body>
 
 </html>
+<?php include "footer.php"; ?>
