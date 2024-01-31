@@ -1,6 +1,6 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
-  // Eğer bir oturum başlatılmamışsa başlat
+   
   header("Location: index.php");
    exit;
 }
@@ -271,7 +271,7 @@ try {
     </li>
 
     <li>
-      <p>İletişim</p>
+      <a href="contact-us.php">İletişim</a>
     </li>
   </ul>
 

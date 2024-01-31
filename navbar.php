@@ -5,7 +5,9 @@ if (session_status() == PHP_SESSION_NONE) {
     
    
 }
- 
+function isPageActive($pageName) {
+    return basename($_SERVER['PHP_SELF']) === $pageName;
+}
 
 ?>
 
