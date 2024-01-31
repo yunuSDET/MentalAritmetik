@@ -64,116 +64,98 @@ include 'navbar.php';
      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  
      // Kullanıcının adını çek
-     $query = $pdo->prepare("SELECT userId FROM scores WHERE userId = :userId AND DATE(zaman_damgasi) = CURRENT_DATE");
-     $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+     $query = $pdo->prepare("select username, Total FROM users join (SELECT userId, sum(score) as Total FROM scores WHERE  DATE(zaman_damgasi) = CURRENT_DATE GROUP by userId order by Total desc) on users.id=userId;");
      $query->execute();
- 
-     $userActualPoint = $query->fetchColumn();
-  
-     // JSON_ENCODE kontrolü
-     if ($userActualPoint === false || $userActualPoint === null) {
-         $userActualPoint = 0; // veya başka bir değer atayabilirsiniz
-     }
-      
- 
- 
- 
- 
-     //total point
-     $query = $pdo->prepare("SELECT sum(score) FROM scores WHERE userId = :userId");
-     $query->bindParam(':userId', $userId, PDO::PARAM_INT);
-     $query->execute();
- 
-     $userTotalPoint = $query->fetchColumn();
-  
-     // JSON_ENCODE kontrolü
-     if ($userTotalPoint === false || $userTotalPoint === null) {
-         $userTotalPoint = 0; // veya başka bir değer atayabilirsiniz
-     }
- 
- 
- 
- 
-     //Günlük zaman
-  
-      $query = $pdo->prepare("SELECT sum(time_seconds) FROM times WHERE userId = :userId AND DATE(zaman_damgasi) = CURRENT_DATE");
-      $query->bindParam(':userId', $userId, PDO::PARAM_INT);
-      $query->execute();
-  
-      $userActualTime = $query->fetchColumn();
-   
-      // JSON_ENCODE kontrolü
-      if ($userActualTime  === false || $userActualTime === null) {
-       $userActualTime  = 0; // veya başka bir değer atayabilirsiniz
-      }
+     $theNumberOfUsers= $query->rowCount();
      
+     echo "<table border='1'>
+     
+     <tr>
+     <th colspan='3' class='text-center'>Günlük Tablo</th>
+     </tr>
+
+     <tr>
+     
+       <th>Sıra Numarası</th>
+         <th>Kullanıcı Adı</th>
+         <th>Toplam</th>
+     </tr>";
+
+while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+   echo "<tr>
+            <td>{$userOrder}</td>
+             <td>{$row['username']}</td>
+             <td>{$row['Total']}</td>
+         </tr>";
+         $userOrder+=1;
+}
+
+echo "</table>";
+
+// PDO bağlantısını kapat
  
  
-      //Toplam süre
+
+
+$endDate = date('Y-m-d');  // Bugünün tarihi
+
+// Bugünden geriye doğru 7 günü kapsayan bir tarih hesapla
+$startDate = date('Y-m-d', strtotime('-7 days', strtotime($endDate)));
+
+
+// SQL sorgusu
+$query = $pdo->prepare("
+    SELECT username, Total
+    FROM users
+    JOIN (
+        SELECT userId, SUM(score) AS Total
+        FROM scores
+        WHERE DATE(zaman_damgasi) BETWEEN :startDate AND :endDate
+        GROUP BY userId
+        ORDER BY Total DESC
+    ) ON users.id = userId
+");
+
+// Parametreleri bind et
+$query->bindParam(':startDate', $startDate, PDO::PARAM_STR);
+$query->bindParam(':endDate', $endDate, PDO::PARAM_STR);
+
+// Sorguyu çalıştır
+$query->execute();
+
+// Tabloyu HTML olarak yazdır
+echo "<table border='1'>
+      <tr>
+          <th colspan='3' class='text-center'>Son Hafta Tablosu</th>
+      </tr>
+      <tr>
+          <th>Sıra Numarası</th>
+          <th>Kullanıcı Adı</th>
+          <th>Toplam</th>
+      </tr>";
+
+$counter = 1;
+while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+    echo "<tr>
+              <td>{$counter}</td>
+              <td>{$row['username']}</td>
+              <td>{$row['Total']}</td>
+          </tr>";
+    $counter++;
+}
+
+echo "</table>";
+
+// PDO bağlantısını kapat
+$pdo = null;
+ 
   
-  
-       $query = $pdo->prepare("SELECT sum(time_seconds) FROM times WHERE userId = :userId");
-       $query->bindParam(':userId', $userId, PDO::PARAM_INT);
-       $query->execute();
-   
-       $userTotalTime = $query->fetchColumn();
-    
-       // JSON_ENCODE kontrolü
-       if ($userActualTime  === false || $userTotalTime === null) {
-         $userTotalTime  = 0; // veya başka bir değer atayabilirsiniz
-       }
- 
- 
-       echo '<script type="module" src="util.js"></script>';
-       echo '<script>';
-       
-       echo 'document.addEventListener("DOMContentLoaded", async function() {';
-       echo '  var userActualPoint = ' . $userActualPoint . ';'; 
-       echo '  var userActualTime = ' . $userActualTime . ';'; 
-       echo '  document.getElementById("current-point").innerHTML = ' . $userActualPoint . ';';
-       echo '  document.getElementById("current-time-seconds").innerHTML = ' . $userActualTime. ';';
-       echo '  await update_right_side_bar(' . $userActualPoint . ');';
-    
-       echo '});';
-       
-       echo '</script>';
- 
- 
- 
  } catch (PDOException $e) {
      echo 'Hata: ' . $e->getMessage();
  }
  ?>   
 
 
-
- 
-    <h2></h2>
-    <table>
-
-         <tr>
-           <th class="text-center" colspan="3">Lider Tablosu</th>
-        </tr>
-
-        <tr>
-            <th>Sıra</th>
-            <th>Günlük</th>
-            <th>Haftalık</th>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-
-
- 
-    </table>
  
 
 
