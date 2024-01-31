@@ -13,6 +13,7 @@ if (session_status() == PHP_SESSION_NONE) {
 .footer {
     position: fixed;
     bottom: 0;
+
     width: 100%;
     background-color: #f8f9fa; /* Footer arkaplan rengi */
     padding: 10px; /* Footer içeriği ile kenar boşluğu */

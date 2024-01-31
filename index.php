@@ -69,7 +69,7 @@ include 'navbar.php';
     <hr class="my-4">
     
 <div class="row justify-content-center mb-4">
-  <div class="col-sm-6">
+  <div class="col-sm-6 mb-4">
 
       <div class="card" style="width: 26rem;">
         <div class="card-body">
@@ -82,6 +82,10 @@ include 'navbar.php';
          
         </div>
       </div>
+  </div>
+
+  <div class="col-sm-12 mt-5 mb-5">
+     
   </div>
 
 </div>
@@ -112,5 +116,6 @@ include 'navbar.php';
     -->
   </body>
 
-  <?php include "footer.php"; ?>
+
 </html>
+<?php include "footer.php"; ?>
