@@ -264,7 +264,7 @@ try {
           <p>Bugün - <?php echo $userActualTime." saniye" ?></p>
         </li>
         <li>
-          <p>Hafta - <?php echo $userTotalTime." saniye" ?></p>
+          <p>Toplam - <?php echo $userTotalTime." saniye" ?></p>
         </li>
  
       </ul>
