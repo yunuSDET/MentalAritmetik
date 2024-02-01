@@ -14,7 +14,7 @@ function isPageActive($pageName) {
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Parmak Abaküsü</a>
+    <a class="navbar-brand" href="#">Mental Aritmetik</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,7 +38,8 @@ function isPageActive($pageName) {
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="finger-read.php">Parmak Okuma</a>
-                            <a class="dropdown-item" href="levels.php">Seviyeler</a>
+                            <a class="dropdown-item" href="levels.php">İşlemler</a>
+                            <a class="dropdown-item" href="soroban.php">Abaküs Çalışma</a>
                             
                         </div>
                     </li>

@@ -54,7 +54,7 @@ include 'navbar.php';
 
   </style>
 
-  <title>Parmak Abaküsü</title>
+  <title>Mental Aritmetik</title>
 
 </head>
 

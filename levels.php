@@ -56,7 +56,7 @@ include 'navbar.php';
 
 
 
-    <title>Parmak Abaküsü</title>
+    <title>Mental Aritmetik</title>
   </head>
   <body>
 
@@ -90,7 +90,7 @@ include 'navbar.php';
       <div class="row max-auto">
 
         <div class="col-sm-9 ">
-        <h1 class="display-3" style="text-align: center;color:Darkorange "><b>PARMAK ABAKÜSÜ </b></h1>
+        <h1 class="display-3" style="text-align: center;color:Darkorange "><b>Mental Aritmetik</b></h1>
           <form>
             <div class="form-row align-items-center">
             
