@@ -63,14 +63,14 @@ function getLoggedInUserId() {
 
 function update_right_side_bar(newScore) {
     let progressBar = document.getElementById("progress-bar");
-    if(newScore>=2000){
+    if(newScore>=1000){
         progressBar.style.width =100 + "%";
         progressBar.setAttribute("aria-valuenow", 100);
             progressBar.setAttribute("class", "progress-bar bg-success");
             document.getElementById("daily-progress").innerHTML = 100;
             return;
     } 
-    newScore = (newScore / 2000).toFixed(2).split(".")[1];
+    newScore = (newScore / 1000).toFixed(2).split(".")[1];
     
 
     var xhr = new XMLHttpRequest();

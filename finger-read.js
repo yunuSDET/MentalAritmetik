@@ -218,7 +218,7 @@ async function start(event) {
         let userAnswer = document.getElementById("user-answer").value;
         if (!userAnswer) return;
 
-        newPoint = 5 + 5 / parseFloat(time);
+        newPoint = 5 + parseInt(1.5*(5 / parseFloat(time)));
         newTime = parseFloat(time);
 
         if (generatedNumber == parseInt(userAnswer)) {
