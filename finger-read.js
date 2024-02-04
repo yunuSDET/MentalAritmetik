@@ -15,6 +15,7 @@ let time = timeElement.selectedOptions[0].textContent;
 let generatedNumber = 0;
 let pagePoint = 0;
 let pageTime = 0;
+let pagePointElementFinger = document.getElementById("daily-point-finger");
 let pagePointElement = document.getElementById("current-point");
 let pageTimeElement = document.getElementById("current-time-seconds");
 
@@ -228,8 +229,10 @@ async function start(event) {
             pagePointElement.innerHTML = Math.round(parseInt(pagePointElement.innerHTML) + newPoint);
 
             
+            pagePointElementFinger.innerHTML = parseInt(pagePointElementFinger.innerHTML) +newPoint;
 
-            update_right_side_bar(pagePointElement.innerHTML);
+
+            update_right_side_bar(pagePointElementFinger.innerHTML,"finger");
 
             pageTimeElement.innerHTML = Math.round(parseInt(pageTimeElement.innerHTML) + newTime+1);
 

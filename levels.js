@@ -9,6 +9,8 @@ let operator = document.getElementById("islem").selectedOptions[0].textContent;
 let aralik = document.getElementById("aralik").selectedOptions[0].textContent;
 let islemSayisi = document.getElementById("islem-sayisi").selectedOptions[0].textContent;
 let pagePointElement = document.getElementById("current-point");
+let pagePointElementIslem = document.getElementById("daily-point-islemler");
+
 let pageTimeElement = document.getElementById("current-time-seconds");
 let point=parseInt(pagePointElement.innerHTML);
 let minValue = aralik.split("-")[0];
@@ -364,9 +366,12 @@ async function start(event) {
             
             pagePointElement.innerHTML = point;
             pageTimeElement.innerHTML  =parseInt(pageTimeElement.innerHTML) + parseInt(spentTime);
-            
+       
+            pagePointElementIslem.innerHTML =currentPoint+ parseInt(pagePointElementIslem.innerHTML);
+           
 
-            update_right_side_bar(pagePointElement.innerHTML);
+            
+            update_right_side_bar(pagePointElementIslem.innerHTML,"levels");
                 
             
             

@@ -25,12 +25,67 @@ try {
         $userActualPoint = 0; // veya başka bir değer atayabilirsiniz
     }
      
+
     
 
     
 } catch (PDOException $e) {
    echo 'Hata: ' . $e->getMessage();
 }
+
+//userActualFingerPoint
+$userActualFingerPoint  = 0;
+try {
+  $pdo = new PDO('sqlite:database.db');
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // Kullanıcının adını çek
+  $query = $pdo->prepare("SELECT sum(score) FROM scores WHERE userId = :userId AND DATE(zaman_damgasi) = CURRENT_DATE AND pageName = 'finger-read.php'");
+  $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+  $query->execute();
+
+  $userActualFingerPoint = $query->fetchColumn();
+
+ 
+   
+  
+  
+
+  
+} catch (PDOException $e) {
+ echo 'Hata: ' . $e->getMessage();
+}
+
+
+
+
+
+//userActualIslemPoint
+$userActualIslemPoint  = 0;
+try {
+  $pdo = new PDO('sqlite:database.db');
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // Kullanıcının adını çek
+  $query = $pdo->prepare("SELECT sum(score) FROM scores WHERE userId = :userId AND DATE(zaman_damgasi) = CURRENT_DATE AND pageName = 'levels.php'");
+  $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+  $query->execute();
+
+  $userActualIslemPoint = $query->fetchColumn();
+
+ 
+   
+  
+  
+
+  
+} catch (PDOException $e) {
+ echo 'Hata: ' . $e->getMessage();
+}
+
+
+
+
 ?>
 
  
@@ -133,9 +188,20 @@ try {
       <a href="#"><?php echo 'Merhaba ' . $_SESSION['user'] ?></a>
     </li>
 
-    <li>
+   
 
-    <p>Günlük Görev İlerleme: % <span id="daily-progress"></span></p>
+
+
+
+
+    <li>
+      <a href="#pageSubmenuilerlemeler" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Günlük İlerlemeler</a>
+      <ul class="collapse list-unstyled" id="pageSubmenuilerlemeler">
+      
+      
+      <li>
+
+    <p>Parmak Okuma: <span id="daily-point-finger"><?php echo $userActualFingerPoint; ?></span> p, % <span id="daily-progress"></span></p>
 
     <div class="progress">
   <div class="progress-bar bg-warning" id="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -146,6 +212,30 @@ try {
 
       
     </li>
+       
+    <li>
+
+<p>İşlemler: <span id="daily-point-islemler"><?php echo $userActualIslemPoint; ?></span> p, % <span id="daily-progress-islemler"></span></p>
+
+<div class="progress">
+<div class="progress-bar bg-warning" id="progress-bar-islemler" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+<hr>
+
+
+  
+</li>
+
+ 
+      </ul>
+    </li>
+
+    
+
+ 
+
+   
 
  <?php
  
@@ -230,8 +320,8 @@ try {
       echo '  var userActualTime = ' . $userActualTime . ';'; 
       echo '  document.getElementById("current-point").innerHTML = ' . $userActualPoint . ';';
       echo '  document.getElementById("current-time-seconds").innerHTML = ' . $userActualTime. ';';
-      echo '  await update_right_side_bar(' . $userActualPoint . ');';
-   
+      echo '  await update_right_side_bar(' . $userActualFingerPoint . ',"finger");';
+      echo '  await update_right_side_bar(' . $userActualIslemPoint. ',"levels");';
       echo '});';
       
       echo '</script>';
@@ -256,7 +346,7 @@ try {
  
       </ul>
     </li>
-    <li>
+    
     <li>
       <a href="#pageSubmenuSure" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Süre Tablosu</a>
       <ul class="collapse list-unstyled" id="pageSubmenuSure">

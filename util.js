@@ -61,8 +61,13 @@ function getLoggedInUserId() {
 }
 
 
-function update_right_side_bar(newScore) {
-    let progressBar = document.getElementById("progress-bar");
+function update_right_side_bar(newScore,nameOfProgress) {
+    var xhr = new XMLHttpRequest();
+
+    if(nameOfProgress==="finger"){
+ 
+
+        let progressBar = document.getElementById("progress-bar");
     if(newScore>=1000){
         progressBar.style.width =100 + "%";
         progressBar.setAttribute("aria-valuenow", 100);
@@ -73,7 +78,7 @@ function update_right_side_bar(newScore) {
     newScore = (newScore / 1000).toFixed(2).split(".")[1];
     
 
-    var xhr = new XMLHttpRequest();
+    
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById("daily-progress").innerHTML = newScore;
@@ -86,6 +91,44 @@ function update_right_side_bar(newScore) {
 
         }
     };
+
+
+    }else if(nameOfProgress==="levels"){
+        let progressBar = document.getElementById("progress-bar-islemler");
+    if(newScore>=1000){
+        progressBar.style.width =100 + "%";
+        progressBar.setAttribute("aria-valuenow", 100);
+            progressBar.setAttribute("class", "progress-bar bg-success");
+            document.getElementById("daily-progress-islemler").innerHTML = 100;
+            return;
+    } 
+    newScore = (newScore / 1000).toFixed(2).split(".")[1];
+    
+
+    
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById("daily-progress-islemler").innerHTML = newScore;
+        
+           
+            progressBar.style.width = newScore + "%";
+            progressBar.setAttribute("aria-valuenow", newScore);
+      
+             
+
+        }
+    };
+
+    }
+
+
+    
+
+
+
+
+
+
 
     xhr.open("GET", "right-side-bar.php", true);
     xhr.send();
