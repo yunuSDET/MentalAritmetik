@@ -19,6 +19,9 @@ let pagePointElementFinger = document.getElementById("daily-point-finger");
 let pagePointElement = document.getElementById("current-point");
 let pageTimeElement = document.getElementById("current-time-seconds");
 
+
+
+
 let startButton = document.getElementById("start");
 startButton.addEventListener("click", start);
 
@@ -199,6 +202,10 @@ async function start(event) {
     hidePopup();
 
     scene.innerHTML = '<div class="row mt-4"><div class="col-4 offset-4"><input type="text" class="form-control" placeholder="Sayıyı Girin... " aria-label="First name" id="user-answer"><button type="submit" class="btn btn-primary" id="control">Kontrol Et</button></div></div>';
+    if (scene) {
+        scene.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }
+    
     let inputElement = document.getElementById("user-answer");
     inputElement.focus();
     let checkButton = document.getElementById("control");

@@ -36,7 +36,7 @@ function playBeepSound(name) {
 
 }
 
-
+ 
 document.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         // Enter tuşuna basıldığında ve sayfa üzerinde başka bir etkileşim olmadığında
@@ -298,7 +298,9 @@ async function start(event) {
      
     if (isWorking==true) return;
 
-    
+    if (scene) {
+        scene.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }
 
     
     if(checkInputBoxes()==false) {

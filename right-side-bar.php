@@ -48,7 +48,10 @@ try {
 
  
    
-  
+  if ($userActualFingerPoint === false || $userActualFingerPoint === null) {
+    // Sorgu boş veya null bir sonuç döndü, değeri 0 olarak ayarla
+    $userActualFingerPoint = 0;
+}
   
 
   
@@ -73,13 +76,17 @@ try {
 
   $userActualIslemPoint = $query->fetchColumn();
 
- 
+  if ($userActualIslemPoint === false || $userActualIslemPoint === null) {
+    // Sorgu boş veya null bir sonuç döndü, değeri 0 olarak ayarla
+    $userActualIslemPoint = 0;
+}
    
   
   
 
   
 } catch (PDOException $e) {
+
  echo 'Hata: ' . $e->getMessage();
 }
 

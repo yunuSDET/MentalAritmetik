@@ -279,6 +279,17 @@ include 'navbar.php';
               </table>
 </div>
 
+<div class="row mt-4">
+
+<div style="font-size: 100px;" class="col-sm text-center" id="scene">
+
+</div>
+   
+
+
+</div>
+
+
 
         </div>
           
@@ -297,15 +308,7 @@ include 'navbar.php';
 
      
 
-      <div class="row mt-4">
 
-        <div style="font-size: 100px;" class="col-sm text-center" id="scene">
-     
-        </div>
-           
-
-
-      </div>
 
       </div>
 

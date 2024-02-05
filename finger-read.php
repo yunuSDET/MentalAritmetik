@@ -169,7 +169,14 @@ include 'navbar.php';
 
         </div>
 
+        <div class="row mt-4">
 
+<div style="font-size: 85px;" class="col-sm text-center" id="scene">
+</div>
+
+
+
+</div>
 
       </div>
 
@@ -191,14 +198,7 @@ include 'right-side-bar.php';
 
 
 
-    <div class="row mt-4">
 
-      <div style="font-size: 85px;" class="col-sm text-center" id="scene">
-      </div>
-
-
-
-    </div>
 
 
 
