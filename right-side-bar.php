@@ -208,7 +208,7 @@ try {
       
       <li>
 
-    <p>Parmak Okuma: <span id="daily-point-finger"><?php echo $userActualFingerPoint; ?></span> p, % <span id="daily-progress"></span></p>
+    <p>Okuma: <span id="daily-point-finger"><?php echo $userActualFingerPoint; ?></span> puan,(% <span id="daily-progress"></span>)</p>
 
     <div class="progress">
   <div class="progress-bar bg-warning" id="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -222,7 +222,7 @@ try {
        
     <li>
 
-<p>İşlemler: <span id="daily-point-islemler"><?php echo $userActualIslemPoint; ?></span> p, % <span id="daily-progress-islemler"></span></p>
+<p>İşlem: <span id="daily-point-islemler"><?php echo $userActualIslemPoint; ?></span> puan, (% <span id="daily-progress-islemler"></span>)</p>
 
 <div class="progress">
 <div class="progress-bar bg-warning" id="progress-bar-islemler" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>

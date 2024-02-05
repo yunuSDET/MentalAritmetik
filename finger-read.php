@@ -79,10 +79,10 @@ include 'navbar.php';
               <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
               <h5 style="color:red;">Aralık Seçin</h5>
               <select class="custom-select mr-sm-2" id="aralik">
-                <option selected>Etkinlik Seçin</option>
+                <option value="Secim">Etkinlik Seçin</option>
                 <option value="Birlikler">Birlikler</option>
                 <option value="Onluklar">Onluklar</option>
-                <option value="1-99">1-99</option>
+                <option selected value="1-99">1-99</option>
               </select>
             </div>
 
@@ -90,7 +90,7 @@ include 'navbar.php';
               <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
               <h5 style="color:red;">Bekleme Süresi Seçin</h5>
               <select class="custom-select mr-sm-2" id="bekleme">
-                <option selected>Süre Seçin</option>
+                <option value=0>Süre Seçin</option>
                 <option value=1>0.1</option>
                 <option value=2>0.2</option>
                 <option value=3>0.3</option>
@@ -100,7 +100,7 @@ include 'navbar.php';
                 <option value=7>0.7</option>
                 <option value=8>0.8</option>
                 <option value=9>0.9</option>
-                <option value=10>1.0</option>
+                <option selected value=10>1.0</option>
                 <option value=11>1.1</option>
                 <option value=12>1.2</option>
                 <option value=13>1.3</option>
