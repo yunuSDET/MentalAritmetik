@@ -202,8 +202,8 @@ try {
 
 
     <li>
-      <a href="#pageSubmenuilerlemeler" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Günlük İlerlemeler</a>
-      <ul class="collapse list-unstyled" id="pageSubmenuilerlemeler">
+      <a href="#pageSubmenuilerlemeler" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Günlük İlerlemeler</a>
+      <ul class="list-unstyled collapse show" id="pageSubmenuilerlemeler">
       
       
       <li>

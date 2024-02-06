@@ -22,8 +22,13 @@ let pageTimeElement = document.getElementById("current-time-seconds");
 
 
 
+
+
+
 let startButton = document.getElementById("start");
 startButton.addEventListener("click", start);
+
+
 
 document.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
@@ -65,7 +70,9 @@ function showPopup(score, isTrue, msg) {
         falseImg.style.height = "40px";
         popup.appendChild(falseImg);
         popup.innerHTML += "<br>";
-        popup.innerHTML += lastQuestionFingerPositions + "<br><h2>Cevap: " + msg + "<h2>";
+        popup.innerHTML += lastQuestionFingerPositions + "<br><h2>Cevap: " + msg + "<h2>" ;
+
+        
     } else {
         popup.style.background = "White";
         var questioImg = document.createElement("img");
@@ -140,7 +147,7 @@ let lastQuestionFingerPositions;
 
 async function askQuestion() {
     let output = getValueInRange();
-    actualQuestion = '<img src="/img/' + output[1][0] + '.png" class="roundedfloat-start mr-3" alt="..."><img src="/img/' + output[1][1] + '.png" class="rounded float-end" alt="..."></img>';
+    actualQuestion = '<div class="row"><div class="col-md-6" style="display: flex;"><img src="/img/' + output[1][0] + '.png" class="rounded float-start mr-3" alt="..."><img src="/img/' + output[1][1] + '.png" class="rounded float-end" alt="..."></div></div>';
     lastQuestionFingerPositions = actualQuestion;
     showPopup();
     playBeepSound("beep");
@@ -225,8 +232,24 @@ async function start(event) {
     checkButton.addEventListener("click", () => {
         let userAnswer = document.getElementById("user-answer").value;
         if (!userAnswer) return;
+ 
+      
+        selectedRange = selectRangeElement.selectedOptions[0].textContent;
+        
+        
+        if(selectedRange==="1-99"){
+            newPoint = 5 + parseInt(5 / parseFloat(time));
+          
+          
+        }else{
+            newPoint = 5 + parseInt(5 / parseFloat(time));
+           
+            
+            if(newPoint>20) newPoint=20;
+        }
 
-        newPoint = 5 + parseInt(5 / parseFloat(time));
+
+        
         newTime = parseFloat(time);
 
         if (generatedNumber == parseInt(userAnswer)) {
