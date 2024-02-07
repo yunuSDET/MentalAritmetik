@@ -104,7 +104,7 @@ if (isset($_SESSION['user']) && $_SESSION['user'] === 'admin') {
                     echo "<div class='container mt-4'>";
                     echo "<h3>Görev Verilen Kullanıcının Skorları:</h3>";
                     echo "<table class='table'>";
-                    echo "<thead><tr><th>Username</th><th>Score</th><th>Zaman Damgası</th><th>Sayfa Adı</th><th>Skor Durumu</th></tr></thead>";
+                    echo "<thead><tr><th>Kullanıcı Adı</th><th>Puan</th><th>Tarih</th><th>Etkinlik Adı</th><th>Görev Tamamlama Durumu</th></tr></thead>";
                     echo "<tbody>";
 
                     foreach ($selectedUserScores as $scoreRow) {
@@ -139,7 +139,7 @@ if (isset($_SESSION['user']) && $_SESSION['user'] === 'admin') {
                     echo "<div class='container mt-4'>";
                     echo "<h3>Skorlarınız:</h3>";
                     echo "<table class='table'>";
-                    echo "<thead><tr><th>Score</th><th>Zaman Damgası</th><th>Sayfa Adı</th><th>Skor Durumu</th></tr></thead>";
+                    echo "<thead><tr><th>Puan</th><th>Tarih</th><th>Etkinlik Adı</th><th>Görev Tamamlama Durumu</th></tr></thead>";
                     echo "<tbody>";
 
                     foreach ($userScores as $scoreRow) {
