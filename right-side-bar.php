@@ -25,6 +25,7 @@ try {
         $userActualPoint = 0; // veya başka bir değer atayabilirsiniz
     }
      
+    
 
     
 
