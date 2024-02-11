@@ -23,9 +23,8 @@ include 'navbar.php';
     <!-- Custom CSS -->
     <style>
         body {
-          font-family: 'Single Day', cursive;
-      background: url('/img/light.jpg') no-repeat;
-      background-size: cover;
+            background-color: #e9ecef; /* Sayfa arka plan rengi */
+            color: #343a40; /* Sayfa metin rengi */
         }
 
         .jumbotron {

@@ -24,6 +24,7 @@ let level ="L" + parseInt(document.getElementById("selected_level").selectedOpti
 
 let isWorking=false;
 
+
 //ILK SAYI 50 OLURSA HATA OLUŞUYOR
 
 function playBeepSound(name) {
@@ -36,7 +37,7 @@ function playBeepSound(name) {
 
 }
 
- 
+
 document.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         // Enter tuşuna basıldığında ve sayfa üzerinde başka bir etkileşim olmadığında
@@ -298,10 +299,10 @@ async function start(event) {
      
     if (isWorking==true) return;
 
+    
     if (scene) {
         scene.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
     }
-
     
     if(checkInputBoxes()==false) {
         console.log("Complete the inputs");

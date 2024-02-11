@@ -25,7 +25,6 @@ try {
         $userActualPoint = 0; // veya başka bir değer atayabilirsiniz
     }
      
-    
 
     
 
@@ -209,7 +208,7 @@ try {
       
       <li>
 
-    <p>Okuma: <span id="daily-point-finger"><?php echo $userActualFingerPoint; ?></span> puan,(% <span id="daily-progress"></span>)</p>
+    <p>Okuma: <span id="daily-point-finger"><?php echo $userActualFingerPoint; ?></span> puan, (% <span id="daily-progress"></span>)</p>
 
     <div class="progress">
   <div class="progress-bar bg-warning" id="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>

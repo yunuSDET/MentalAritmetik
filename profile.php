@@ -155,7 +155,7 @@ $db->close();
 
                         echo "<td>{$scoreRow['score']}</td>";
 
-                        echo "<td>" . ($scoreRow['score'] >= 1000 ? '✔' : '✘') . "</td>";
+                        echo "<td>" . ($scoreRow['score'] >= 1000 ? '✔️' : '❌') . "</td>";
 
                         echo "</tr>";
                     }
@@ -213,7 +213,7 @@ $db->close();
 
                         echo "<td>{$scoreRow['score']}</td>";
 
-                        echo "<td>" . ($scoreRow['score'] >= 1000 ? '✔' : '✘') . "</td>";
+                        echo "<td>" . ($scoreRow['score'] >= 1000 ? '✔️' : '❌') . "</td>";
 
                         echo "</tr>";
                     }

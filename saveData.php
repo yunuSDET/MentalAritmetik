@@ -77,4 +77,3 @@ function saveUserTime($userId, $time, $pageName) {
 }
 
 ?>
-

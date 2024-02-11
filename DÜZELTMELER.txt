@@ -1,10 +1,6 @@
 
 
-Öğrenciler için görev atama sayfası yapılsın
-Bu görevler sidebar da görüntülensin ve görevden daha geri bir çalışmaya izin verilmesin (puan verilmesin)
-
-Admine özel öğrenci takip sayfası yapılsın
-
-Profil sayfasında öğrenci son gün, son hafta ve tüm zamanlar puanlarını, son haftada tamamladığı görevleri görsün 
-
-
+SORULAR POPUPDA SORULSUN (SCENE OLABİLİR BAK)
+Yazılar ve tablolar büyütülmeli
+Navbar büyütülmeli
+Hatada doğru cevap gösterilmeli (parmaklarla)

@@ -136,7 +136,7 @@ function update_right_side_bar(newScore,nameOfProgress) {
 
 
 function calcultePoint(time,islemSayisi){
-    return 5 + 3*parseInt(islemSayisi/time)+parseInt(islemSayisi);
+    return 10 + 4*parseInt(islemSayisi/time)+parseInt(islemSayisi);
 }
 
 

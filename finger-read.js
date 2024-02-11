@@ -21,14 +21,8 @@ let pageTimeElement = document.getElementById("current-time-seconds");
 
 
 
-
-
-
-
 let startButton = document.getElementById("start");
 startButton.addEventListener("click", start);
-
-
 
 document.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
@@ -70,9 +64,7 @@ function showPopup(score, isTrue, msg) {
         falseImg.style.height = "40px";
         popup.appendChild(falseImg);
         popup.innerHTML += "<br>";
-        popup.innerHTML += lastQuestionFingerPositions + "<br><h2>Cevap: " + msg + "<h2>" ;
-
-        
+        popup.innerHTML += lastQuestionFingerPositions + "<br><h2>Cevap: " + msg + "<h2>";
     } else {
         popup.style.background = "White";
         var questioImg = document.createElement("img");
@@ -208,11 +200,11 @@ async function start(event) {
     await wait(timeMiliSecond);
     hidePopup();
 
-    scene.innerHTML = '<div class="row mt-4"><div class="col-4 offset-4"><input type="text" class="form-control" placeholder="Sayıyı Girin... " aria-label="First name" id="user-answer"><button type="submit" class="btn btn-primary" id="control">Kontrol Et</button></div></div>';
     if (scene) {
         scene.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
     }
 
+    scene.innerHTML = '<div class="row mt-4"><div class="col-4 offset-4"><input type="text" class="form-control" placeholder="Sayıyı Girin... " aria-label="First name" id="user-answer"><button type="submit" class="btn btn-primary" id="control">Kontrol Et</button></div></div>';
     let inputElement = document.getElementById("user-answer");
     inputElement.focus();
     let checkButton = document.getElementById("control");
@@ -232,10 +224,9 @@ async function start(event) {
     checkButton.addEventListener("click", () => {
         let userAnswer = document.getElementById("user-answer").value;
         if (!userAnswer) return;
- 
-      
-        selectedRange = selectRangeElement.selectedOptions[0].textContent;
-        
+
+    selectedRange = selectRangeElement.selectedOptions[0].textContent;
+         
         
         if(selectedRange==="1-99"){
             newPoint = 5 + parseInt(5 / parseFloat(time));
@@ -243,13 +234,13 @@ async function start(event) {
           
         }else{
             newPoint = 5 + parseInt(5 / parseFloat(time));
-           
+             
             
             if(newPoint>20) newPoint=20;
         }
 
 
-        
+
         newTime = parseFloat(time);
 
         if (generatedNumber == parseInt(userAnswer)) {
