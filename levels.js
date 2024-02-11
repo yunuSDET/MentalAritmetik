@@ -362,7 +362,7 @@ async function start(event) {
             scene.innerHTML='<h1 class="display-2 bg-success">Tebrikler,<br>Cevap '+result+'.</h1>'
             playBeepSound("claps")
             spentTime=time*islemSayisi
-            let currentPoint= calcultePoint(time,islemSayisi);
+            let currentPoint= calcultePoint(time,islemSayisi,parseInt(level.split('')[1]),maxValue);
             point=parseInt(pagePointElement.innerHTML);
             point += currentPoint;
             

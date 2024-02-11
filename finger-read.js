@@ -141,6 +141,7 @@ async function askQuestion() {
     let output = getValueInRange();
     actualQuestion = '<div class="row"><div class="col-md-6" style="display: flex;"><img src="/img/' + output[1][0] + '.png" class="rounded float-start mr-3" alt="..."><img src="/img/' + output[1][1] + '.png" class="rounded float-end" alt="..."></div></div>';
     lastQuestionFingerPositions = actualQuestion;
+    
     showPopup();
     playBeepSound("beep");
 }
@@ -194,11 +195,12 @@ async function start(event) {
     }
 
     timeMiliSecond = parseFloat(time) * 1000;
-
+    await wait(300);
     await askQuestion();
 
     await wait(timeMiliSecond);
     hidePopup();
+   
 
     if (scene) {
         scene.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });

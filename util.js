@@ -135,8 +135,50 @@ function update_right_side_bar(newScore,nameOfProgress) {
 }
 
 
-function calcultePoint(time,islemSayisi){
-    return 10 + 4*parseInt(islemSayisi/time)+parseInt(islemSayisi);
+function calcultePoint(time,islemSayisi,level,max){
+    let result =parseInt(5 +parseInt(islemSayisi)*parseInt(islemSayisi/time));
+    
+
+ 
+    
+    if(max===20){
+        result = parseInt(result*1.3) 
+    }else if(max===50){
+        result = parseInt(result*1.6) 
+    }else if(max===99){
+
+        result = parseInt(result*1.9) 
+    }else if(max===999){
+        result = parseInt(result*2.5) 
+    }
+
+
+
+    if (level===2){
+  
+       result = parseInt(result*1.5) 
+    }
+
+    if (level===3){
+        result = parseInt(result*2) 
+     }
+
+     
+     console.log(result);
+     
+     for(let i=40;i<1000000;i+=20){
+        if(result<i) break;
+        result=i + parseInt((result-i)*0.5)
+     }
+     
+
+
+     console.log(result);
+  
+     
+     
+     return result;
+
 }
 
 
