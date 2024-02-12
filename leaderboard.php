@@ -29,7 +29,7 @@ include 'navbar.php';
         $medals = ['🥇', '🥈', '🥉'];
 
         // Günlük Tablo
-        $dailyQuery = $pdo->prepare("SELECT username, Total FROM users JOIN (SELECT userId, sum(score) as Total FROM scores WHERE  DATE(zaman_damgasi) = CURRENT_DATE GROUP BY userId ORDER BY Total DESC) ON users.id=userId;");
+        $dailyQuery = $pdo->prepare("SELECT username,role, Total FROM users JOIN (SELECT userId, sum(score) as Total FROM scores WHERE  DATE(zaman_damgasi) = CURRENT_DATE GROUP BY userId ORDER BY Total DESC) ON users.id=userId;");
         $dailyQuery->execute();
         $theNumberOfUsers = $dailyQuery->rowCount();
 
@@ -51,7 +51,7 @@ include 'navbar.php';
 
         $userOrder = 1;
         while ($row = $dailyQuery->fetch(PDO::FETCH_ASSOC)) {
-            if ($row['username'] != "admin") {
+            if ($row['role'] != "teacher") {
                 echo "<tr>
                         <td>{$userOrder}</td>
                         <td>{$row['username']}</td>";
@@ -82,7 +82,7 @@ include 'navbar.php';
                 $endDate = ($currentDayOfWeek == 7) ? $today : date('Y-m-d', strtotime('next sunday'));
 
         $weeklyQuery = $pdo->prepare("
-            SELECT username, Total
+            SELECT username,role, Total
             FROM users
             JOIN (
                 SELECT userId, SUM(score) AS Total
@@ -120,7 +120,7 @@ include 'navbar.php';
 
             $counter = 1;
             foreach ($weeklyResults as $row) {
-                if ($row['username'] != "admin") {
+                if ($row['role'] != "teacher") {
                     echo "<tr>
                             <td>{$counter}</td>
                             <td>{$row['username']}</td>";

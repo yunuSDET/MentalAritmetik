@@ -76,4 +76,9 @@ function saveUserTime($userId, $time, $pageName) {
     $db->close();
 }
 
+
+
+
+
+
 ?>
