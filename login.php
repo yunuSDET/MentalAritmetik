@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+ 
 // Veritabanı bağlantısı
 try {
     $db = new PDO('sqlite:database.db');
@@ -25,6 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($password, $user['password'])) {
             $_SESSION['user'] = $username; // Oturumu başlat
             $_SESSION['userId'] =  $user['id']; // Oturumu başlat
+            $_SESSION['userRole'] =  $user['role']; // Oturumu başlat
+            $_SESSION['userTeacher'] =  $user['teacher']; // Oturumu başlat
+
             header('Location: index.php'); // Ana sayfaya yönlendir
             exit();
         } else {

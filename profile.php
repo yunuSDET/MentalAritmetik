@@ -6,13 +6,25 @@ include 'navbar.php';
 $databaseFile = 'database.db'; // Veritabanı dosya adı
 $db = new SQLite3($databaseFile);
 
-if (isset($_SESSION['user']) && $_SESSION['user'] === 'admin') {
-    // Admin kullanıcı ise
+if (isset($_SESSION['user']) && $_SESSION['userRole'] === 'teacher') {
+
+    $isAdmin=$_SESSION['user']=="admin" ? "":" WHERE users.teacher = :teacherName";
+
+    // Öğretmen kullanıcı ise
     $query = "SELECT users.id AS userId, users.username AS userUsername, scores.score, scores.zaman_damgasi, scores.pageName
-              FROM users
-              LEFT JOIN scores ON users.id = scores.userId
-              ORDER BY users.id, scores.zaman_damgasi DESC";
-    $result = $db->query($query);
+    FROM users
+    LEFT JOIN scores ON users.id = scores.userId "
+    .$isAdmin.
+    " ORDER BY users.id, scores.zaman_damgasi DESC";
+
+ $resultStmt = $db->prepare($query);
+$resultStmt->bindValue(':teacherName', $_SESSION['user'], SQLITE3_TEXT);
+$result = $resultStmt->execute();
+
+
+ 
+
+
 
     $userScores = array();
     while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
@@ -41,7 +53,7 @@ if (isset($_SESSION['user']) && $_SESSION['user'] === 'admin') {
         );
     }
 } else {
-    // Admin değilse, kullanıcıya özel sayfayı yükle
+    // Öğretmen değilse, kullanıcıya özel sayfayı yükle
     $userId = $_SESSION['userId'];
     $username = $_SESSION['user'];
 
@@ -107,7 +119,7 @@ $db->close();
                 <h2 style="text-align:center">Görev Tamamlama Listesi</h2>
 
                 <?php
-                if (isset($_SESSION['user']) && $_SESSION['user'] === 'admin') {
+                if (isset($_SESSION['user']) && $_SESSION['userRole'] === 'teacher') {
                     // Admin ise
                     echo "<form method=\"POST\" action=\"\" class=\"col-4 offset-4\">";
                     echo "<label for=\"userList\">Kullanıcı Seç:</label>";
@@ -186,7 +198,7 @@ $db->close();
                 ?>
 
                 <?php
-                if (isset($_SESSION['user']) && $_SESSION['user'] !== 'admin') {
+                if (isset($_SESSION['user']) && $_SESSION['userRole'] == 'student') {
                     // Admin değilse
                     echo "<div class='container mt-4'>";
                     echo "<h3>Skorlarınız:</h3>";

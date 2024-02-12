@@ -23,6 +23,9 @@ function isPageActive($pageName) {
         if (isset($_SESSION['user'])) {
             // Giriş yapıldıysa
             $username = $_SESSION['user'];
+            $userTypeMenu=$_SESSION["userRole"]=="teacher" ? '<li class="nav-item active">
+            <a class="nav-link" href="task.php">Görev Ver <span class="sr-only">(current)</span></a>
+            </li>':"";
 
             echo '<ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -30,7 +33,9 @@ function isPageActive($pageName) {
                     </li>
                     <li class="nav-item active">
                     <a class="nav-link" href="leaderboard.php">Lider Tablosu <span class="sr-only">(current)</span></a>
-                </li>
+                    </li>
+
+                    '.$userTypeMenu.'
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
