@@ -31,6 +31,66 @@ try {
 } catch (PDOException $e) {
     echo 'Hata: ' . $e->getMessage();
 }
+
+
+
+//userActualFingerPoint
+$userActualFingerPoint  = 0;
+try {
+  $pdo = new PDO('sqlite:database.db');
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // Kullanıcının adını çek
+  $query = $pdo->prepare("SELECT sum(score) FROM scores WHERE userId = :userId AND DATE(zaman_damgasi) = CURRENT_DATE AND pageName = 'finger-read.php'");
+  $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+  $query->execute();
+
+  $userActualFingerPoint = $query->fetchColumn();
+
+ 
+   
+  if ($userActualFingerPoint === false || $userActualFingerPoint === null) {
+    // Sorgu boş veya null bir sonuç döndü, değeri 0 olarak ayarla
+    $userActualFingerPoint = 0;
+}
+  
+
+  
+} catch (PDOException $e) {
+ echo 'Hata: ' . $e->getMessage();
+}
+
+
+
+
+
+//userActualIslemPoint
+$userActualIslemPoint  = 0;
+try {
+  $pdo = new PDO('sqlite:database.db');
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // Kullanıcının adını çek
+  $query = $pdo->prepare("SELECT sum(score) FROM scores WHERE userId = :userId AND DATE(zaman_damgasi) = CURRENT_DATE AND pageName = 'levels.php'");
+  $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+  $query->execute();
+
+  $userActualIslemPoint = $query->fetchColumn();
+
+  if ($userActualIslemPoint === false || $userActualIslemPoint === null) {
+    // Sorgu boş veya null bir sonuç döndü, değeri 0 olarak ayarla
+    $userActualIslemPoint = 0;
+}
+   
+  
+  
+
+  
+} catch (PDOException $e) {
+
+ echo 'Hata: ' . $e->getMessage();
+}
+
 ?>
 
  

@@ -77,10 +77,11 @@ function showPopup(score, isTrue, msg) {
         popup.innerHTML += lastQuestionFingerPositions;
     }
 
+    popup.style.background = "transparent";  
     popup.style.display = "block";
     popup.style.position = "fixed";
-
-    popup.style.top = "60%";
+   
+    popup.style.top = "50%";
     popup.style.left = "50%";
     popup.style.transform = "translate(-50%, -50%)";
     popup.style.padding = "20px";
@@ -137,12 +138,25 @@ function wait(ms) {
 
 let lastQuestionFingerPositions;
 
+function loadImage(src) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve(img);
+        img.onerror = (err) => reject(err);
+    });
+}
+
 async function askQuestion() {
     let output = getValueInRange();
-    actualQuestion = '<div class="row"><div class="col-md-6" style="display: flex;"><img src="/img/' + output[1][0] + '.png" class="rounded float-start mr-3" alt="..."><img src="/img/' + output[1][1] + '.png" class="rounded float-end" alt="..."></div></div>';
+    actualQuestion = '<div class="row"><div class="col-md-6" style="display: flex;"><img src="/img/' + output[1][0] + '.png" style="width: 350px; height: 350px;" class="rounded float-start" alt="..."><img src="/img/' + output[1][1] + '.png" style="width: 350px; height: 350px;" class="rounded float-end" alt="..."></div></div>';
+
     lastQuestionFingerPositions = actualQuestion;
     
     showPopup();
+    await Promise.all([loadImage('/img/' + output[1][0] + '.png'), loadImage('/img/' + output[1][1] + '.png')]);
+
+     
     playBeepSound("beep");
 }
 
@@ -259,13 +273,16 @@ async function start(event) {
 
             pageTimeElement.innerHTML = Math.round(parseInt(pageTimeElement.innerHTML) + newTime+1);
 
-            showPopup(newPoint, true);
+            showPopupAndHide(newPoint, true);
+             
+            
+
             kazanilanPuaniHesaplaVeGonder(newPoint);
             kazanilanSureyiHesaplaVeGonder(newTime+1);
             actualQuestion = "ask";
         } else {
             scene.innerHTML = "";
-            showPopup(newPoint, false, generatedNumber);
+            showPopupAndHide(newPoint, false, generatedNumber);
             playBeepSound("no");
 
             pageTimeElement.innerHTML = Math.round(parseInt(pageTimeElement.innerHTML) + newTime);
@@ -276,3 +293,20 @@ async function start(event) {
     
 }
 
+async function showPopupAndHide(newPoint,isTrue,generatedNumber) {
+
+if(isTrue){
+    showPopup(newPoint, true);
+    await wait(2000);
+    hidePopup();
+}else{
+    showPopup(newPoint, false, generatedNumber);
+    await wait(2000);
+    hidePopup();
+}
+
+ 
+    
+
+  
+}

@@ -282,7 +282,7 @@ include 'navbar.php';
 
 <div class="row mt-4">
 
-<div style="font-size: 100px;" class="col-sm text-center" id="scene">
+<div style="font-size: 180px;" class="col-sm text-center" id="scene">
 
 </div>
    

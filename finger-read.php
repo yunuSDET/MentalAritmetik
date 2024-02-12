@@ -172,7 +172,7 @@ include 'navbar.php';
 
         <div class="row mt-4">
 
-<div style="font-size: 85px;" class="col-sm text-center" id="scene">
+<div style="font-size: 80px;" class="col-sm text-center" id="scene">
 </div>
 
 
