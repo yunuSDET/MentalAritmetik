@@ -75,10 +75,11 @@ include 'navbar.php';
   
 
  
-$startDate = date('Y-m-d', strtotime('last monday'));
-
- 
-$endDate = date('Y-m-d', strtotime('next sunday'));
+                $currentDayOfWeek = date('N'); // Haftanın gününü 1'den 7'ye döndüren fonksiyon (1: Pazartesi, 7: Pazar)
+                $today = date('Y-m-d');
+                
+                $startDate = ($currentDayOfWeek == 1) ? $today : date('Y-m-d', strtotime('last monday'));
+                $endDate = ($currentDayOfWeek == 7) ? $today : date('Y-m-d', strtotime('next sunday'));
 
         $weeklyQuery = $pdo->prepare("
             SELECT username, Total
