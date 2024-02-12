@@ -109,7 +109,7 @@ $db->close();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <script>
-       function kaydet() {
+        function kaydet() {
             var taskValues = {};
 
             <?php
@@ -157,7 +157,29 @@ $db->close();
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.send(params);
         }
+
+        // Sayfa yüklendiğinde görevleri çekip, form alanlarına yerleştiren fonksiyon
+        window.onload = function() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var tasks = JSON.parse(this.responseText);
+
+                    // Hızlı Giriş kutusunu güncelle
+                    document.getElementById('hizliGiris').value = tasks.hizliGiris;
+
+                    // Her bir öğrencinin görevini güncelle
+                    <?php
+                    foreach ($userTables as $user) {
+                        $userId = $user['id'];
+                        echo "document.getElementById('{$userId}').value = tasks['{$userId}'];";
+                    }
+                    ?>
+                }
+            };
+            xhttp.open("GET", "getTasks.php", true);
+            xhttp.send();
+        }
     </script>
-     
 </body>
 </html>
