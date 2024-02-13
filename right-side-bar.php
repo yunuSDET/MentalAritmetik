@@ -189,7 +189,7 @@ try {
   }
 </style>
 
-<nav id="sidebar" class="bg-light sidebar-content">
+<nav id="sidebar" class="bg-light sidebar-content" style="margin-bottom: 500px;">
 
 
 

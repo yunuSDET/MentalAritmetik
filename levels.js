@@ -165,6 +165,8 @@ async function askQuestion(miliSeconds) {
 
         if(i==1){
         result=number;
+
+ 
         scene.innerHTML="";
         await wait(100);
         scene.innerHTML=result;
