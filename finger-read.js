@@ -147,9 +147,16 @@ function loadImage(src) {
     });
 }
 
+function getMaxSizeStyle(maxSize) {
+    return 'max-width: ' + maxSize + 'px; max-height: ' + maxSize + 'px; width: auto; height: auto;';
+}
+
 async function askQuestion() {
     let output = getValueInRange();
-    actualQuestion = '<div class="row"><div class="col-md-6" style="display: flex;"><img src="/img/' + output[1][0] + '.png" style="width: 350px; height: 350px;" class="rounded float-start" alt="..."><img src="/img/' + output[1][1] + '.png" style="width: 350px; height: 350px;" class="rounded float-end" alt="..."></div></div>';
+    actualQuestion = '<div class="row"><div class="col-md-6" style="display: flex;">' +
+                  '<img src="/img/' + output[1][0] + '.png" style="' + getMaxSizeStyle(450) + '" class="rounded float-start" alt="...">' +
+                  '<img src="/img/' + output[1][1] + '.png" style="' + getMaxSizeStyle(450) + '" class="rounded float-end" alt="...">' +
+                '</div></div>';
 
     lastQuestionFingerPositions = actualQuestion;
     
@@ -297,11 +304,11 @@ async function showPopupAndHide(newPoint,isTrue,generatedNumber) {
 
 if(isTrue){
     showPopup(newPoint, true);
-    await wait(2000);
+    await wait(1500);
     hidePopup();
 }else{
     showPopup(newPoint, false, generatedNumber);
-    await wait(2000);
+    await wait(3000);
     hidePopup();
 }
 

@@ -136,7 +136,7 @@ try {
 
   #sidebar ul li ul li {
     margin: 20;
-    color: #F5DBCB;
+    color: gray;
     background: #EDE4DF
   }
 
@@ -212,20 +212,13 @@ function getTasks() {
 }
 
 function displayTasks(tasks) {
-    // tasks nesnesini kullanarak görevleri sayfada göster
-    // Örneğin, console.log(tasks) ile konsola yazdırarak doğru veri yapısını anlayabilirsiniz
-
-    // Burada görevleri nasıl göstereceğinizi belirleyerek işlemlerinizi yapabilirsiniz
-    // Örneğin, bir HTML elementine ekleyerek göstermek:
     var tasksContainer = document.getElementById('taskContainer');
 
-    // Her bir görevi döngü ile ekleyebilirsiniz
     for (var userId in tasks) {
         var task = tasks[userId];
 
-        // Örneğin, her bir görevi bir liste elemanı olarak ekleyebilirsiniz
         var listItem = document.createElement('li');
-        listItem.textContent = 'User ID: ' + userId + ', Task: ' + task;
+        listItem.textContent = 'Öğrenci Adı: ' + userId + ', Görev: ' + task;
 
         tasksContainer.appendChild(listItem);
     }
