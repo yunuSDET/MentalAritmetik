@@ -3,6 +3,11 @@ include 'sessionManager.php';
 checkUserSession();
 ?>
 
+<?php  
+echo '<script> alert("Form geçici olarak devre dışı. jonahkulcu@gmail.com adresinden iletişim kurabilirsiniz.") </script>';
+header("Refresh: 1; URL=index.php");  
+//Form güncellenince burayı kaldır.
+?>
 
 <?php
 include 'navbar.php';
@@ -55,6 +60,9 @@ include 'navbar.php';
         </div>
     </div>
 </div>
+
+
+
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
