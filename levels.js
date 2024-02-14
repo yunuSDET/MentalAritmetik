@@ -326,7 +326,8 @@ async function start(event) {
     await wait(2000);
 
     
-    scene.innerHTML='<div class="row mt-4"><div class="col-4 offset-4"><input type="text" class="form-control" placeholder="Cevabı Girin... " aria-label="First name" id="user-answer"><button type="submit" class="btn btn-primary" id="control">Kontrol Et</button></div></div>';
+    scene.innerHTML = '<div class="row mt-4"><div class="col-4 offset-4"><input type="text" class="form-control" placeholder="Cevabı Girin..." aria-label="First name" id="user-answer" autocomplete="off"><button type="submit" class="btn btn-primary" id="control">Kontrol Et</button></div></div>';
+
 
 
 
@@ -361,7 +362,7 @@ async function start(event) {
         let userAnswer = document.getElementById("user-answer").value;
         if(!userAnswer) return;
         if(result==parseInt(userAnswer)){
-            scene.innerHTML='<h1 class="display-2 bg-success">Tebrikler,<br>Cevap '+result+'.</h1>'
+            scene.innerHTML='<h1 class="display-3 bg-success">Tebrikler</h1>'
             playBeepSound("claps")
             spentTime=time*islemSayisi
             let currentPoint= calcultePoint(time,islemSayisi,parseInt(level.split('')[1]),maxValue);
@@ -385,8 +386,8 @@ async function start(event) {
 
 
         }else{
-            scene.innerHTML='<h1 class="display-2 bg-danger">Hata<br>Cevap '+result+'.</h1>' 
-            scene.innerHTML+='<p style="font-size:50px">Soru: '+questions+'</p>';
+            scene.innerHTML='<h1 class="display-3 bg-danger">Cevap '+result+'.</h1>' 
+            scene.innerHTML+='<p style="font-size:70px">Soru: '+questions+'</p>';
             playBeepSound("error1")
         }
 
