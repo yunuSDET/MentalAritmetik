@@ -27,8 +27,9 @@ startButton.addEventListener("click", start);
 document.addEventListener("keyup", function (event) {
    
     if (event.key === "Enter") {
-        if (document.activeElement !== startButton) {
+        if (document.activeElement !== startButton && actualQuestion==="ask") {
             if(onShow===false){
+
              startButton.click();   
             }
             
@@ -39,7 +40,7 @@ document.addEventListener("keyup", function (event) {
 
 startButton.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
-        if(onShow===false){
+        if(onShow===false && actualQuestion==="ask"){
             startButton.click();   
            }
     }
@@ -49,7 +50,8 @@ let popupPoint = document.getElementById("popupPoint");
 
 async function showPopup(score, isTrue, msg) {
     onShow = true; 
-        startButton.click();     
+    
+          
     var popup = document.createElement("div");
      
     popup.id = "popup";
@@ -106,16 +108,18 @@ async function showPopup(score, isTrue, msg) {
     if(isTrue){
         await wait(1500);
         await hidePopup();
-        onShow = false; 
+       
+        
     } else if(isTrue === false){
         await wait(3000);
         await hidePopup();
-        onShow = false; 
+        
     } else {
         var timeMiliSecond = parseFloat(time) * 1000;
-        await wait(timeMiliSecond + 1000); // Add 1000 milliseconds for an extra second
+        await wait(timeMiliSecond); 
         await hidePopup();
-        onShow = false; 
+      
+ 
     }
 }
 
@@ -125,6 +129,8 @@ async function hidePopup() {
         setTimeout(function () {
             popup.style.display = "none";
             popupPoint.removeChild(popup);
+            onShow = false; 
+             
         }, 1);
     }
 }
@@ -215,7 +221,7 @@ scene.innerHTML = "";
 async function start(event) {
     event.preventDefault();
 
-    if (scene.innerHTML.includes("Kontrol Et") || scene.innerHTML.includes("img") || actualQuestion !== "ask") return;
+    if (scene.innerHTML.includes("Kontrol Et") || scene.innerHTML.includes("img") || actualQuestion !== "ask" || onShow===true) return;
 
     if (checkInputBoxes() == false) {
         console.log("Complete the inputs");
@@ -225,7 +231,7 @@ async function start(event) {
     pagePointElement = document.getElementById("current-point");
     pageTimeElement = document.getElementById("current-time-seconds");
    
-
+    actualQuestion=""; //ask ise buraya gelmiştir. Tekrar girişi engellemek için boş atama yaptık. Zaten ileride soru eklenecek.
  
 
     selectedRange = document.getElementById("aralik").selectedOptions[0].textContent;
