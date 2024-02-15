@@ -5,7 +5,7 @@ let minValue = 0;
 let maxValue = 0;
 let digits = [];
 var actualQuestion = "ask";
-
+let onShow=false;
 let selectRangeElement = document.getElementById("aralik");
 let selectedRange = selectRangeElement.selectedOptions[0].textContent;
 
@@ -25,24 +25,33 @@ let startButton = document.getElementById("start");
 startButton.addEventListener("click", start);
 
 document.addEventListener("keyup", function (event) {
+   
     if (event.key === "Enter") {
         if (document.activeElement !== startButton) {
-            startButton.click();
+            if(onShow===false){
+             startButton.click();   
+            }
+            
         }
     }
+    
 });
 
 startButton.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
-        startButton.click();
+        if(onShow===false){
+            startButton.click();   
+           }
     }
 });
 
 let popupPoint = document.getElementById("popupPoint");
 
-function showPopup(score, isTrue, msg) {
+async function showPopup(score, isTrue, msg) {
+    onShow = true; 
+        startButton.click();     
     var popup = document.createElement("div");
-
+     
     popup.id = "popup";
 
     if (isTrue) {
@@ -55,6 +64,7 @@ function showPopup(score, isTrue, msg) {
         popup.innerHTML += "<br>";
         popup.innerHTML += "Puan: " + Math.round(score);
         popup.style.background = "Gainsboro ";
+        
     } else if (isTrue === false) {
         popup.style.background = "Gainsboro";
         var falseImg = document.createElement("img");
@@ -92,9 +102,24 @@ function showPopup(score, isTrue, msg) {
     popup.style.fontSize = "24px";
 
     popupPoint.appendChild(popup);
+
+    if(isTrue){
+        await wait(1500);
+        await hidePopup();
+        onShow = false; 
+    } else if(isTrue === false){
+        await wait(3000);
+        await hidePopup();
+        onShow = false; 
+    } else {
+        var timeMiliSecond = parseFloat(time) * 1000;
+        await wait(timeMiliSecond + 1000); // Add 1000 milliseconds for an extra second
+        await hidePopup();
+        onShow = false; 
+    }
 }
 
-function hidePopup() {
+async function hidePopup() {
     var popup = document.getElementById("popup");
     if (popup) {
         setTimeout(function () {
@@ -159,12 +184,12 @@ async function askQuestion() {
                 '</div></div>';
 
     lastQuestionFingerPositions = actualQuestion;
-    
-    showPopup();
+    playBeepSound("beep");
+    await showPopup();
     await Promise.all([loadImage('/img/' + output[1][0] + '.png'), loadImage('/img/' + output[1][1] + '.png')]);
 
      
-    playBeepSound("beep");
+    
 }
 
 function checkInputBoxes() {
@@ -199,8 +224,9 @@ async function start(event) {
 
     pagePointElement = document.getElementById("current-point");
     pageTimeElement = document.getElementById("current-time-seconds");
+   
 
-    hidePopup();
+ 
 
     selectedRange = document.getElementById("aralik").selectedOptions[0].textContent;
 
@@ -215,12 +241,10 @@ async function start(event) {
         maxValue = 99;
     }
 
-    timeMiliSecond = parseFloat(time) * 1000;
+    
     await wait(300);
     await askQuestion();
-
-    await wait(timeMiliSecond);
-    hidePopup();
+     
    
 
     if (scene) {
@@ -235,8 +259,9 @@ async function start(event) {
     inputElement.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();
-            setTimeout(() => {
+            setTimeout(async () => {
                 checkButton.click();
+                  
             }, 0);
         }
     });
@@ -280,7 +305,7 @@ async function start(event) {
 
             pageTimeElement.innerHTML = Math.round(parseInt(pageTimeElement.innerHTML) + newTime+1);
 
-            showPopupAndHide(newPoint, true);
+            showPopup(newPoint, true);
              
             
 
@@ -289,7 +314,7 @@ async function start(event) {
             actualQuestion = "ask";
         } else {
             scene.innerHTML = "";
-            showPopupAndHide(newPoint, false, generatedNumber);
+            showPopup(newPoint, false, generatedNumber);
             playBeepSound("no");
 
             pageTimeElement.innerHTML = Math.round(parseInt(pageTimeElement.innerHTML) + newTime);
@@ -300,20 +325,8 @@ async function start(event) {
     
 }
 
-async function showPopupAndHide(newPoint,isTrue,generatedNumber) {
-
-if(isTrue){
-    showPopup(newPoint, true);
-    await wait(1500);
-    hidePopup();
-}else{
-    showPopup(newPoint, false, generatedNumber);
-    await wait(3000);
-    hidePopup();
-}
-
+ 
  
     
 
-  
-}
+ 
