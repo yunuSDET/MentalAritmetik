@@ -265,7 +265,7 @@ async function start(event) {
     inputElement.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();
-            setTimeout(async () => {
+            setTimeout( () => {
                 checkButton.click();
                   
             }, 0);
