@@ -162,24 +162,25 @@ function getUserActualPoint($pdo, $userId, $pageName)
     });
 
     function getTasks() {
-        fetch('getTasks.php')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                try {
-                    const jsonData = JSON.parse(data.trim());
-                    displayTasks(jsonData);
-                } catch (error) {
-                    console.error('Error parsing JSON:', error);
-                    console.log('Response text:', data);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    }
+    fetch('getTasks.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            if (data.status === 200) {
+                displayTasks(data.data);
+            } else {
+                console.error('Error:', data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+
 
     function displayTasks(tasks) {
         var tasksContainer = document.getElementById('taskContainer');

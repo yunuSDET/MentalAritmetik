@@ -22,6 +22,7 @@ include 'navbar.php';
 <body>
 
     <?php
+    date_default_timezone_set('Europe/Istanbul'); 
     try {
         $pdo = new PDO('sqlite:database.db');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -39,7 +40,7 @@ include 'navbar.php';
                         <table class='table table-bordered table-striped'>
                             <thead class='thead-dark'>
                                 <tr>
-                                    <th colspan='3' class='text-center'>Günlük Tablo</th>
+                                    <th colspan='3' class='text-center'>Günlük Tablo (".date('d-m-Y').")</th>
                                 </tr>
                                 <tr>
                                     <th>Sıra Numarası</th>
@@ -76,10 +77,18 @@ include 'navbar.php';
 
  
                 $currentDayOfWeek = date('N'); // Haftanın gününü 1'den 7'ye döndüren fonksiyon (1: Pazartesi, 7: Pazar)
+                
                 $today = date('Y-m-d');
                 
                 $startDate = ($currentDayOfWeek == 1) ? $today : date('Y-m-d', strtotime('last monday'));
                 $endDate = ($currentDayOfWeek == 7) ? $today : date('Y-m-d', strtotime('next sunday'));
+
+
+
+                $startDateDMY =($currentDayOfWeek == 1) ? date('d-m-Y') : date('d-m-Y', strtotime('last monday'));
+
+                $endDateDMY = ($currentDayOfWeek == 7) ? date('d-m-Y')  : date('d-m-Y', strtotime('next sunday'));
+
 
         $weeklyQuery = $pdo->prepare("
             SELECT username,role, Total
@@ -108,7 +117,7 @@ include 'navbar.php';
                             <table class='table table-bordered table-striped'>
                                 <thead class='thead-dark'>
                                     <tr>
-                                        <th colspan='3' class='text-center'>Son Hafta Tablosu (".$startDate." - ".$endDate.")</th>
+                                        <th colspan='3' class='text-center'>Son Hafta Tablosu (".$startDateDMY." - ".$endDateDMY.")</th>
                                     </tr>
                                     <tr>
                                         <th>Sıra Numarası</th>
@@ -141,7 +150,22 @@ include 'navbar.php';
                     </div>
                 </div>";
         } else {
-            echo "<p class='text-center'>Son hafta için kayıt bulunamadı.</p>";
+            echo "<div class='row mt-4'>
+            <div class='col-md-12'>
+                <table class='table table-bordered table-striped'>
+                    <thead class='thead-dark'>
+                        <tr>
+                            <th colspan='3' class='text-center'>KAYIT BULUNAMADI (".$startDateDMY." - ".$endDateDMY.")</th>
+                        </tr>
+                        <tr>
+                            <th>Sıra Numarası</th>
+                            <th>Kullanıcı Adı</th>
+                            <th>Toplam Puan</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>";
+
         }
 
         // PDO bağlantısını kapat

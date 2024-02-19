@@ -5,7 +5,6 @@ include 'navbar.php';
 
 $databaseFile = 'database.db'; // Veritabanı dosya adı
 $db = new SQLite3($databaseFile);
-$userId = $_SESSION['userId'];
 
 if (isset($_SESSION['user'])) {
     $activeUserRole = $_SESSION['userRole'];
@@ -47,22 +46,15 @@ if (isset($_SESSION['user'])) {
 
 // Veritabanı bağlantısını kapat
 $db->close();
-
-
-
-
-
-
-
- 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+
     <title>Kullanıcı Listesi</title>
 </head>
 <body>
@@ -74,25 +66,19 @@ $db->close();
                     if ($activeUserRole === 'admin' || $activeUserRole === 'teacher') {
                         // Display user select for admin and teacher
                         echo "<label for='userSelect'>Kullanıcı Seçin:</label>";
-                        echo "<label for='userSelect'>Kullanıcı Seçin:</label>";
-                        echo "<select class='custom-select' id='userSelect'>";
+                        echo "<select class='custom-select' id='userSelect' onchange='updateForm()'>";
                         echo "<option value=''>Seçin</option>";
-                        
+
                         foreach ($userTables as $user) {
                             $userId = $user['id'];
                             $username = $user['username'];
-                        
+
                             echo "<option value='{$userId}'>{$username}</option>";
                         }
-                        
+
                         echo "</select>";
-                        
-                        // Düğme ekleyerek tetikleme
-                        echo "<button type='button' onclick='callUpdate()'>Güncelle</button>";
-                        
-                        // JavaScript kodu
-                        
-                        
+
+                       
 
                         // Display the form for each user
                         foreach ($userTables as $user) {
@@ -100,8 +86,8 @@ $db->close();
 
                             echo "<div id='{$userId}Form' style='display:none;'>";
                             echo "<h5>{$user['username']} Formu</h5>";
-
-                            echo '<h2 style="color:blue;">Parmak Okuma Görevi</h2>';                          
+ 
+echo '<h2 style="color:blue;">Parmak Okuma Görevi</h2>';                          
 echo '<form>';
 echo '  <div class="form-row justify-content-center">';
 echo '    <div class="col-sm-6 my-1">';
@@ -128,7 +114,7 @@ echo '        <option value=6>0.6</option>';
 echo '        <option value=7>0.7</option>';
 echo '        <option value=8>0.8</option>';
 echo '        <option value=9>0.9</option>';
-echo '        <option  selected  value=10>1.0</option>';
+echo '        <option selected value=10>1.0</option>';
 echo '        <option value=11>1.1</option>';
 echo '        <option value=12>1.2</option>';
 echo '        <option value=13>1.3</option>';
@@ -152,12 +138,6 @@ echo '    </div>';
 echo '  </div>';
 echo '  <div class="col-auto mt-4 text-center">';
  
-
-echo '      <h5 style="color:red;">Minimum Görev Puanı </h5>';
-echo '<input type="text" name="exampleInput" value="1000" id=parmakOkumaGorevPuani>';
-
-
-
 echo '    <div class="mx-auto mt-3" style="width: fit-content;">';
  
 echo '    </div>';
@@ -186,13 +166,13 @@ echo '      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preferen
 echo '      <h5>İşlem Seçin</h5>';
 echo '      <select class="custom-select mr-sm-2 col-sm-12" id="islem">';
 echo '        <option value=0>İşlem Seçin</option>';
-echo '        <option selected value=1>Toplama/Çıkarma</option>';
+echo '        <option selected value=1>-+</option>';
 echo '      </select>';
 echo '    </div>';
 echo '    <div class="col-sm-4 my-1 position-relative">';
 echo '      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>';
 echo '      <h5>Aralık Seçin</h5>';
-echo '      <select class="col-sm-12 custom-select mr-sm-2" id="aralikIslem">';
+echo '      <select class="col-sm-12 custom-select mr-sm-2" id="aralik">';
 echo '        <option value=0>Aralık Seçin</option>';
 echo '        <option value=1>1-9</option>';
 echo '        <option value=2>1-20</option>';
@@ -205,7 +185,7 @@ echo '    </div>';
 echo '    <div class="col-6 my-1">';
 echo '      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>';
 echo '      <h5>Bekleme Süresi Seçin</h5>';
-echo '      <select class="custom-select mr-sm-2 col-sm-12" id="beklemeIslem">';
+echo '      <select class="custom-select mr-sm-2 col-sm-12" id="bekleme">';
 echo '        <option value=0>Sure Seçin</option>';
 echo '        <option value=0.1>0.1</option>';
 echo '        <option value=0.2>0.2</option>';
@@ -282,57 +262,35 @@ echo '  </div>';
 echo '  <div class="mx-auto mt-3" style="width: fit-content;">';
 echo '  </div>';
 echo '  <div class="col-sm-12 my- mt-4 position-relative text-center">';
-echo '  <h5 style="color:red;">Minimum Görev Puanı </h5>';
-echo '<input type="text" name="exampleInput" value="1000" id=IslemGorevPuani>';
+echo '    <button type="submit" class="btn btn-primary mt-2" id="save">Kaydet</button>';
 echo '  </div>';
-
-
-
-
 echo '</form>';
 
-                            echo '  <div class="col-sm-12 my- mt-4 position-relative text-center">';
-                            echo '    <button type="button" class="btn btn-primary mt-2" id="save" onclick="saveFormData(\'' . $userId . '\')">Kaydet</button>';
-                            echo '  </div>';
+
+
+
 
                             echo "</div>";
                         }
 
-                        // JavaScript to update forms and handle saving data
                         echo "<script>
+                            function updateForm() {
+                                var selectedUserId = document.getElementById('userSelect').value;
 
-                        function callUpdate(){
-                            isLoaded = false;
-                            updateForm();
-                            
-                        }
-
-                        var isLoaded = false;
-                    
-                        function updateForm() {
-                            var selectedUserId = document.getElementById('userSelect').value;
-                    
-                            // Kontrol ekle
-                            if (!isLoaded) {
                                 // Hide all user forms
                                 for (var userId in " . json_encode($userTables) . ") {
                                     document.getElementById(userId + 'Form').style.display = 'none';
                                 }
-                    
+
                                 if (selectedUserId) {
                                     // Show the selected user's form
                                     document.getElementById(selectedUserId + 'Form').style.display = 'block';
-                    
-                                    // Call a function to load data for the selected user
-                                    loadDataForUser(selectedUserId);
-                                    isLoaded = true; // Yükleme yapıldı
                                 } else {
                                     // Show the default form
-                                    //document.getElementById('defaultForm').style.display = 'block';
+                                    document.getElementById('defaultForm').style.display = 'block';
                                 }
                             }
-                        }
-                    </script>";
+                        </script>";
                     } else {
                         // Diğer durumlar için gerekli içeriği ekleyebilirsiniz.
                     }
@@ -341,68 +299,15 @@ echo '</form>';
             </div>
         </div>
     </div>
-    
-
-
-    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS -->
     <script type="module" src="util.js"></script>
  
-   <?php
- echo "   <script>    
+ 
 
- function updateDatabaseWithNewValues(){
-     var parmakOkumaAralik = document.getElementById('aralik').options[document.getElementById('aralik').selectedIndex].text;
- var parmakOkumaBekleme = document.getElementById('bekleme').options[document.getElementById('bekleme').selectedIndex].text;
- var parmakOkumaGorevPuani = document.getElementById('parmakOkumaGorevPuani').value;
- var islemSeviye = document.getElementById('selected_level').options[document.getElementById('selected_level').selectedIndex].text;
- 
- 
- var islemIslemElement = document.getElementById('islem');
- 
- var selectedOptionValue = islemIslemElement.value;
- 
- 
- 
- if (selectedOptionValue === '1') {
- 
- 
- var islemIslem = 'Toplama/Çıkarma' ;
- 
- } else {
- console.log('Beklenen değer seçilmedi.');
- }
- 
- 
- var islemAralik = document.getElementById('aralikIslem').options[document.getElementById('aralikIslem').selectedIndex].text;
- 
- var islemBekleme = document.getElementById('beklemeIslem').options[document.getElementById('beklemeIslem').selectedIndex].text;
- 
- var islemIslemSayisi = document.getElementById('islem-sayisi').options[document.getElementById('islem-sayisi').selectedIndex].text;
- 
- var islemGorevPuani = document.getElementById('IslemGorevPuani').value;
- 
- 
- 
- // JSON objesini oluştur
- var taskData = {
- parmakOkumaAralik: parmakOkumaAralik,
- parmakOkumaBekleme: parmakOkumaBekleme,
- parmakOkumaGorevPuani: parmakOkumaGorevPuani,
- islemSeviye: islemSeviye,
- islemIslem: islemIslem,
- islemAralik: islemAralik,
- islemBekleme: islemBekleme,
- islemIslemSayisi: islemIslemSayisi,
- islemGorevPuani: islemGorevPuani
- };
- return taskData;
- }
- 
- </script>"
-   ?>
-
+    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+    <!-- Optional JavaScript remains unchanged -->
 </body>
 </html>
