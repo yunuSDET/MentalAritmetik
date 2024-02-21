@@ -157,11 +157,11 @@ function getUserActualPoint($pdo, $userId, $pageName)
 
 <nav id="sidebar" class="bg-light sidebar-content" style="margin-bottom: 500px;">
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        getTasks();
-    });
+document.addEventListener("DOMContentLoaded", function() {
+    getTasks();
+});
 
-    function getTasks() {
+function getTasks() {
     fetch('getTasks.php')
         .then(response => {
             if (!response.ok) {
@@ -180,20 +180,22 @@ function getUserActualPoint($pdo, $userId, $pageName)
         .catch(error => console.error('Error:', error));
 }
 
+function displayTasks(tasks) {
+    var tasksContainer = document.getElementById('taskContainer');
 
+    for (var userId in tasks) {
+        var task = tasks[userId].task;
+        var username = tasks[userId].username;
 
-    function displayTasks(tasks) {
-        var tasksContainer = document.getElementById('taskContainer');
+        var listItem = document.createElement('li');
+        listItem.textContent = 'Öğrenci Adı: ' + username + ', Görev: ' + task;
 
-        for (var userId in tasks) {
-            var task = tasks[userId];
-
-            var listItem = document.createElement('li');
-            listItem.textContent = 'Öğrenci Adı: ' + userId + ', Görev: ' + task;
-
-            tasksContainer.appendChild(listItem);
-        }
+        tasksContainer.appendChild(listItem);
     }
+}
+
+
+
 </script>
     <!-- Your navigation content here -->
     <ul class="list-unstyled components">

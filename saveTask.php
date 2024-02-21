@@ -1,35 +1,25 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['tasks'])) {
-    $userId = $_POST['userId'];
-    $taskDataJson = $_POST['tasks'];
-    $taskData = json_decode($taskDataJson, true);
+    $tasksJson = $_POST['tasks'];
+    $tasks = json_decode($tasksJson, true);
 
-    if ($taskData !== null) {
-        // Veritabanı işlemleri
+    if ($tasks !== null) {
         $databaseFile = 'database.db'; // Veritabanı dosya adı
         $db = new SQLite3($databaseFile);
 
-        // Güncelleme sorgusu
-        $updateQuery = "UPDATE users SET task = :taskData WHERE id = :userId";
-        $stmt = $db->prepare($updateQuery);
+        foreach ($tasks as $userId => $task) {
+            // Her bir kullanıcı için görevi güncelle
+            $userId = $db->escapeString($userId);
+            $task = $db->escapeString($task);
 
-        // Parametreleri bağla
-        $stmt->bindValue(':userId', $userId, SQLITE3_TEXT);
-        $stmt->bindValue(':taskData', $taskDataJson, SQLITE3_TEXT);
-
-        // Sorguyu çalıştır
-        $result = $stmt->execute();
-
-        if ($result !== false) {
-            echo "Başarıyla kaydedildi";
-        } else {
-            echo "Veri kaydetme hatası: " . $db->lastErrorMsg();
+            $updateQuery = "UPDATE users SET task = '{$task}' WHERE id = '{$userId}'";
+            $db->exec($updateQuery);
         }
 
-        // Veritabanı bağlantısını kapat
         $db->close();
+        echo "Başarıyla kaydedildi";
     } else {
-        echo "Görev verisi geçersiz JSON formatında";
+        echo "Görevler boş veya geçersiz JSON formatında";
     }
 } else {
     echo "Geçersiz istek";

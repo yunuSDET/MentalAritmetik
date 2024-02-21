@@ -43,13 +43,13 @@ try {
 
         if ($activeUserName === 'admin') {
             // Admin ise
-            $query = "SELECT id AS userId, task
+            $query = "SELECT id AS userId, username, task
                       FROM users
                       WHERE role = 'student'
                       ORDER BY id";
         } elseif ($activeUserRole === 'teacher') {
             // Öğretmen ise
-            $query = "SELECT id AS userId, task
+            $query = "SELECT id AS userId, username, task
                       FROM users
                       WHERE teacher = :teacherName
                       ORDER BY id";
@@ -68,7 +68,10 @@ try {
 
             $tasks = array();
             while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-                $tasks[$row['userId']] = $row['task'];
+                $tasks[$row['userId']] = array(
+                    'username' => $row['username'],
+                    'task' => $row['task']
+                );
             }
 
             // Veritabanı bağlantısını kapat

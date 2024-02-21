@@ -114,7 +114,7 @@ include 'navbar.php';
                 <select class="custom-select mr-sm-2 col-sm-12" id="islem">
                   <option value=0>İşlem Seçin</option>
 
-                  <option selected value=1>Toplama/Çıkarma</option>
+                  <option selected value=1>-+</option>
                 </select>
 
                 
