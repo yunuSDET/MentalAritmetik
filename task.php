@@ -101,8 +101,17 @@ $db->close();
                             $username = $user['username'];
 
                             echo "<tr>";
-                            echo "<td>{$username}</td>";
-                            echo "<td><textarea id='{$userId}' name='{$userId}' style='width: 100%; height: 150px;'>" . implode("\n", $user['tasks']) . "</textarea></td>";
+
+                            echo "<td><h3>{$username}</h3>
+                            
+                           
+
+ 
+                            
+                            </td>";
+
+
+                            echo "<td><textarea id='{$userId}' name='{$userId}' style='width: 100%; height: 250px;'>" . implode("\n", $user['tasks']) . "</textarea></td>";
 
                             echo "<td></td>";
                             echo "</tr>";
@@ -119,6 +128,8 @@ $db->close();
             </div>
         </div>
     </div>
+
+ 
 
     <!-- Optional JavaScript; choose one of the two! -->
 

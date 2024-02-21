@@ -183,15 +183,20 @@ function getTasks() {
 function displayTasks(tasks) {
     var tasksContainer = document.getElementById('taskContainer');
 
-    for (var userId in tasks) {
-        var task = tasks[userId].task;
-        var username = tasks[userId].username;
+for (var userId in tasks) {
+    var task = tasks[userId].task;
+    var username = tasks[userId].username;
 
-        var listItem = document.createElement('li');
-        listItem.textContent = 'Öğrenci Adı: ' + username + ', Görev: ' + task;
+    var listItem = document.createElement('li');
 
-        tasksContainer.appendChild(listItem);
-    }
+    // Yeni satırları <br> etiketi olarak eklemek
+    task = task.replace(/\n/g, '<br>');
+
+    // innerHTML kullanarak HTML etiketlerini işleme eklemek
+    listItem.innerHTML = '<h4>' + username + ',</h4>  Görev: <br>' + task+'<br>'+'<br>';
+
+    tasksContainer.appendChild(listItem);
+}
 }
 
 
@@ -208,7 +213,7 @@ function displayTasks(tasks) {
                 <span id="msgImg">💬</span></a>
             <ul class="collapse list-unstyled" id="pageSubmenuGorev">
                 <li>
-                    <p id="taskContainer"><?php echo $userTask ?> </p>
+                    <p id="taskContainer"><?php echo nl2br($userTask) ?> </p>
                 </li>
 
             </ul>
