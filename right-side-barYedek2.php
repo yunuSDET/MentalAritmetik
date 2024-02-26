@@ -52,6 +52,69 @@ function getUserActualPoint($pdo, $userId, $pageName)
 
     return $userActualPoint;
 }
+
+ 
+ 
+//Bu kod ile görev json objesi olarak alındı.
+ // Satırları ayır
+$lines = explode("\n", $userTask);
+ 
+
+// İşlenecek veriyi saklamak için bir dizi oluştur
+$result = array();
+
+// Şu anki anahtarı ve objeyi tanımla
+$currentKey = null;
+$currentObject = array();
+
+
+foreach ($lines as $line) {
+    
+    if (empty($line)) {
+        continue;
+    }
+
+    // Eğer satırda ":" varsa, satırı iki bölüme ayır (anahtar ve değer)
+    if (strpos($line, ":") !== false) {
+        list($key, $value) = explode(":", $line, 2);
+        // Anahtarı ve değeri temizle
+        $key = trim($key);
+        $value = trim($value);
+    } else {
+        // ":" yoksa, satırı anahtar olarak kullan ve değeri boş bırak
+        $key = trim($line);
+        $value = "";
+    }
+
+    // Anahtar "Okuma" veya "İşlemler" ise
+    if ($key === "*Okuma" || $key === "*İşlemler") {
+        // Eğer önceki anahtar varsa, objeyi sonuca ekle
+        if (!empty($currentKey) && isset($currentObject)) {
+            $result[$currentKey][] = $currentObject;
+        }
+        // Yeni anahtarı tanımla
+        $currentKey = ($key === "*Okuma") ? "Okuma" : "İşlemler";
+        // Yeni objeyi başlat
+        $currentObject = array();
+    } else {
+        // Anahtar "Okuma" veya "İşlemler" değilse, bu durumda bir obje öğesi ekley
+        $currentObject[$key] = $value;
+    }
+}
+
+// Son objeyi ekle
+if (!empty($currentKey) && isset($currentObject)) {
+    $result[$currentKey][] = $currentObject;
+}
+
+// JSON formatına çevir
+$jsonResult = json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+// Sonucu yazdır
+echo $jsonResult;
+ 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -96,10 +159,13 @@ function getUserActualPoint($pdo, $userId, $pageName)
             list-style: none;
             padding: 0;
             margin: 0;
+        
         }
 
+     
+
         #sidebar ul li ul li {
-            margin: 20;
+            margin: 10;
             color: gray;
             background: #EDE4DF
         }
@@ -115,14 +181,24 @@ function getUserActualPoint($pdo, $userId, $pageName)
         }
 
         #sidebar ul li p {
-            padding: 10px;
+            margin: 1px;
+            padding: 1px;
             font-size: 1em;
             color: #b8c2cc;
             /* Beyaz renk */
             text-decoration: none;
             display: block;
             transition: all 0.3s;
+          
         }
+
+        #sidebar ul>p {
+            margin: 0px;
+          
+          
+        }
+
+
 
         #sidebar ul li a {
             padding: 10px;
@@ -137,6 +213,13 @@ function getUserActualPoint($pdo, $userId, $pageName)
         #sidebar ul li p:hover {
             color: #7386d5;
             background: #2e3338;
+            /* Daha koyu gri renk */
+        }
+
+        h6 {
+            padding: 6px;
+            color: white;
+            background: grey;
             /* Daha koyu gri renk */
         }
 
@@ -200,14 +283,10 @@ for (var userId in tasks) {
 }
 
 
-
 </script>
     <!-- Your navigation content here -->
     <ul class="list-unstyled components">
         <li class="header">
-           
-        
-        
             <a href="#"><?php echo 'Merhaba ' . $_SESSION['user'] ?></a>
         </li>
 
@@ -215,8 +294,89 @@ for (var userId in tasks) {
             <a href="#pageSubmenuGorev" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Görev Mesajı
                 <span id="msgImg">💬</span></a>
             <ul class="collapse list-unstyled" id="pageSubmenuGorev">
-                <li>
-                    <p id="taskContainer"><?php echo nl2br($userTask) ?> </p>
+                
+                    <p id="taskContainer">
+</li>   
+
+                       <?php 
+           
+if($userId!=1){
+    // JSON dizisini PHP dizisine çevir
+$data = json_decode($jsonResult, true);
+$okumaId="okuma";
+$taskCount=0;
+$okumaCount=0;
+$islemCount=0;
+
+// Okuma Görevlerini yazdır
+$okumaElemanSayisi = count($data['Okuma']);
+ 
+echo "<h6>Okuma Görevleri</h6><hr>";
+for ($i = 0; $i < $okumaElemanSayisi; $i++) {
+    $taskCount++;
+    $okumaCount++;
+    echo "<p>";
+    foreach ($data['Okuma'][$i] as $key => $value) {
+        echo "$key: $value<br>";
+    }
+    echo "</p>";
+   
+
+    echo "<ul><li>
+    <p>Görev-{$taskCount} <span id='finger{$okumaCount}'><?php echo $userActualFingerPoint; ?></span> puan, (%
+        <span id='daily-progress-finger{$okumaCount}'></span>)</p>
+    <div class='progress'>
+        <div class='progress-bar bg-warning' id='progress-bar-finger{$okumaCount}' role='progressbar-finger{$okumaCount}'
+             style='width: 0%' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'></div>
+    </div>
+</li></ul>";
+
+
+}
+
+echo "<hr> <br>";
+
+
+
+// İşlem  görevlerini yazdır
+$islemlerElemanSayisi = count($data['İşlemler']);
+echo "<h6>İşlem Görevleri</h6><hr> ";
+for ($i = 0; $i < $islemlerElemanSayisi; $i++) {
+    $taskCount++;
+    $islemCount++;
+    echo "<p>";
+    foreach ($data['İşlemler'][$i] as $key => $value) {
+        echo "$key: $value<br>";
+    }
+    echo "</p>";
+   
+    
+    echo "<ul><li>
+    <p>Görev-{$taskCount} <span id='islemler{$islemCount}'><?php echo $userActualFingerPoint; ?></span> puan, (%
+        <span id='daily-progress-islemler{$islemCount}'></span>)</p>
+    <div class='progress'>
+        <div class='progress-bar bg-warning' id='progress-bar-islemler{$islemCount}' role='progressbar-islemler{$islemCount}'
+             style='width: 0%' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'></div>
+    </div>
+   
+    
+    
+</li></ul><hr>";
+    
+}
+
+ 
+                    
+                    
+               
+}     
+                    
+                    ?> </p>
+
+
+
+
+
                 </li>
 
             </ul>

@@ -10,6 +10,7 @@ let aralik = document.getElementById("aralik").selectedOptions[0].textContent;
 let islemSayisi = document.getElementById("islem-sayisi").selectedOptions[0].textContent;
 let pagePointElement = document.getElementById("current-point");
 let pagePointElementIslem = document.getElementById("daily-point-islemler");
+let soundIsOk=document.getElementById("sound");
 
 let pageTimeElement = document.getElementById("current-time-seconds");
 let point=parseInt(pagePointElement.innerHTML);
@@ -28,6 +29,12 @@ let isWorking=false;
 //ILK SAYI 50 OLURSA HATA OLUŞUYOR
 
 function playBeepSound(name) {
+
+    let soundIsOk=document.getElementById("sound").innerHTML;
+    
+    
+    if(soundIsOk==="🔉") return;
+
     var beepAudio = document.getElementById(name);
 
     // Ses dosyasını başa sar ve çal

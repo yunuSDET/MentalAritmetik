@@ -9,6 +9,8 @@ let onShow=false;
 let selectRangeElement = document.getElementById("aralik");
 let selectedRange = selectRangeElement.selectedOptions[0].textContent;
 
+let soundIsOk=document.getElementById("sound");
+
 let timeElement = document.getElementById("bekleme");
 let time = timeElement.selectedOptions[0].textContent;
 
@@ -136,6 +138,12 @@ async function hidePopup() {
 }
 
 function playBeepSound(name) {
+    
+    let soundIsOk=document.getElementById("sound").innerHTML;
+    
+    
+    if(soundIsOk==="🔉") return;
+
     var beepAudio = document.getElementById(name);
     beepAudio.currentTime = 0;
     beepAudio.play();

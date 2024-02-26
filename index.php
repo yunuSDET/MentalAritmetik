@@ -1,8 +1,4 @@
-<?php
-include 'sessionManager.php';
-checkUserSession();
-?>
-
+ 
 
 <?php
 include 'navbar.php';

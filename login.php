@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <title>Login</title>
+    <title>Giriş Sayfası</title>
 </head>
 
 <body>
@@ -68,24 +68,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="mb-md-5 mt-md-4 pb-5">
 
                                 <form method="post">
-                                    <h2 class="fw-bold mb-2 text-uppercase">Giriş</h2>
+                                    <h2 class="fw-bold mb-2 " style="font-size:45px">GİRİŞ</h2>
                                     <p class="text-white-50 mb-5">Kullanıcı adı ve şifreyi girin!</p>
 
                                     <div class="form-outline form-white mb-4">
+                                    <label class="form-label" for="username" style="font-size:24px">Kullanıcı Adı</label>
                                         <input type="text" id="username" name="username" class="form-control form-control-lg" />
-                                        <label class="form-label" for="username">Kullanıcı Adı</label>
+                                        
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
+                                    <label class="form-label" for="password" style="font-size:24px">Şifre</label>
                                         <input type="password" id="password" name="password" class="form-control form-control-lg" />
-                                        <label class="form-label" for="password">Şifre</label>
+                                       
                                     </div>
 
 
 
 
 
-                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                                    <button class="btn btn-outline-light btn-lg px-5" type="submit" style="font-size:24px">Giriş</button>
 
                                     <?php if (isset($error)) : ?>
                                         <div class="alert alert-danger mt-3" role="alert">
@@ -100,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
 
                             <div>
-                                <p class="mb-0">Hesap açmak mı istiyorsunuz? <a href="#!" class="text-white-50 fw-bold">İletişime Geçin</a>
+                                <p class="mb-0">Hesap açmak mı istiyorsunuz? <a href="/contact-us.php" class="text-white-50 fw-bold">İletişime Geçin</a>
                                 </p>
                             </div>
 

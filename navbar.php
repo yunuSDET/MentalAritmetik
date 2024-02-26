@@ -14,7 +14,7 @@ function isPageActive($pageName) {
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Mental Aritmetik</a>
+    <a class="navbar-brand" href="/index.php">Mental Aritmetik</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,14 +32,14 @@ function isPageActive($pageName) {
                         <a class="nav-link" href="index.php">Ana Sayfa <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                    <a class="nav-link" href="leaderboard.php">Lider Tablosu <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="leaderboard.php">Puan Tablosu <span class="sr-only">(current)</span></a>
                     </li>
 
                     '.$userTypeMenu.'
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Çalışalım
+                            Çalışmalar
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="finger-read.php">Parmak Okuma</a>
@@ -49,19 +49,27 @@ function isPageActive($pageName) {
                         </div>
                     </li>
                   </ul>
+
+                
                   <ul class="navbar-nav ml-auto">
+                  </li>
+                  <li class="nav-item">
+                  <button href="#" class="mt-1 mr-2"><span id="sound" onclick="changeSound()" >🔇</span></button>
+
+                  </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php">' . $username . '</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Logout</a>
+                        <a class="nav-link" href="logout.php">Çıkış</a>
                     </li>
                   </ul>';
         } else {
             // Giriş yapılmadıysa
             echo '<ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
+                        <a class="nav-link" href="login.php">Giriş</a>
                     </li>
                   </ul>';
         }
@@ -69,7 +77,23 @@ function isPageActive($pageName) {
     </div>
 </nav>
 
-<audio id="beep">
+<script>
+
+    function changeSound(){
+     
+     let sound=document.getElementById("sound");
+     if(sound.innerHTML==="🔉"){
+         sound.innerHTML="🔇" ;
+         
+     }else{
+         sound.innerHTML="🔉" ;
+     }
+ }
+
+</script>
+
+
+   <audio id="beep">
         <source src="audio/beep.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>

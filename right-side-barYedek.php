@@ -205,9 +205,6 @@ for (var userId in tasks) {
     <!-- Your navigation content here -->
     <ul class="list-unstyled components">
         <li class="header">
-           
-        
-        
             <a href="#"><?php echo 'Merhaba ' . $_SESSION['user'] ?></a>
         </li>
 
